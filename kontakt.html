@@ -1,0 +1,70 @@
+---
+layout: default
+naslov: Kontakt
+permalink: /kontakt/
+# Kratki tekst iznad forme (možeš ga promijeniti ili obrisati)
+uvod: "Za suradnju, printove ili bilo koje pitanje — pošalji poruku i javit ću se."
+---
+<section class="kontakt">
+  <h1 class="naslov-stranice">{{ page.naslov }}</h1>
+  {% if page.uvod %}<p class="kontakt-uvod">{{ page.uvod }}</p>{% endif %}
+
+  <form class="forma" action="https://formsubmit.co/{{ site.forma_email }}" method="POST"
+        data-ajax="https://formsubmit.co/ajax/{{ site.forma_email }}">
+    <label>
+      <span>Ime</span>
+      <input type="text" name="Ime" required autocomplete="name">
+    </label>
+    <label>
+      <span>E-mail</span>
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label>
+      <span>Poruka</span>
+      <textarea name="Poruka" rows="7" required></textarea>
+    </label>
+
+    <!-- Postavke servisa FormSubmit (ne mijenjati) -->
+    <input type="hidden" name="_subject" value="Nova poruka sa stranice {{ site.naziv }}">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" class="skriveno" tabindex="-1" autocomplete="off">
+
+    <button type="submit">Pošalji</button>
+    <p class="forma-status" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<script>
+(function () {
+  var forma = document.querySelector('.forma');
+  var status = forma.querySelector('.forma-status');
+  var gumb = forma.querySelector('button');
+
+  forma.addEventListener('submit', function (e) {
+    e.preventDefault();
+    gumb.disabled = true;
+    gumb.textContent = 'Šaljem…';
+    status.textContent = '';
+
+    fetch(forma.dataset.ajax, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(forma)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (odg) {
+        if (String(odg.success) !== 'true') throw new Error(odg.message);
+        forma.reset();
+        forma.classList.add('poslano');
+        status.textContent = 'Hvala! Poruka je poslana, javit ću se uskoro.';
+      })
+      .catch(function () {
+        status.textContent = 'Poruka nije poslana. Pokušaj ponovno ili se javi na Instagramu.';
+      })
+      .then(function () {
+        gumb.disabled = false;
+        gumb.textContent = 'Pošalji';
+      });
+  });
+})();
+</script>

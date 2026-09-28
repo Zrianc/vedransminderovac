@@ -1,0 +1,11 @@
+---
+layout: default
+naslov: Galerija
+# mapa iz koje se uzimaju slike za ovu stranicu:
+mapa: slike
+# redoslijed: "normalno" (po imenu datoteke A→Z) ili "obrnuto" (Z→A)
+redoslijed: normalno
+---
+<h1 class="naslov-stranice">{{ page.naslov }}</h1>
+
+{% include galerija.html mapa=page.mapa redoslijed=page.redoslijed %}

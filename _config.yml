@@ -1,0 +1,45 @@
+# ==========================================================
+#  POSTAVKE STRANICE — ovdje mijenjaš ime, opis i linkove
+# ==========================================================
+
+# Ime koje piše gore lijevo i u naslovu kartice preglednika
+naziv: "IME PREZIME"
+
+# Kratki opis (prikazuje se u podnožju i na Googleu)
+opis: "street photography"
+
+# Instagram (ostavi prazno "" ako ga ne želiš prikazati)
+instagram: "https://www.instagram.com/"
+
+# E-mail za kontakt (ostavi prazno "" ako ga ne želiš prikazati)
+email: ""
+
+# E-mail na koji stižu poruke iz forme za kontakt (stranica Kontakt).
+# Prvi put kad netko pošalje poruku, na ovu adresu stiže mail za aktivaciju — klikni "Activate".
+forma_email: "tvoj@email.com"
+
+# Izbornik — redoslijed ovdje je redoslijed na stranici.
+# Za novu galeriju: kopiraj galerija.md, promijeni naslov i mapu, dodaj red ovdje.
+izbornik:
+  - naslov: "Galerija"
+    link: "/"
+  - naslov: "Informacije"
+    link: "/informacije/"
+  - naslov: "Kontakt"
+    link: "/kontakt/"
+
+# true = sve slike se prikazuju crno-bijelo (čak i ako su u boji)
+crno_bijele_slike: false
+
+# Vodeni žig preko slika (samo na prikazu — originalne datoteke ostaju netaknute).
+# Ostavi prazno "" ako ga ne želiš.
+vodeni_zig: ""
+
+# ----------------------------------------------------------
+#  Tehničke postavke — ne treba mijenjati
+# ----------------------------------------------------------
+lang: hr
+permalink: pretty
+exclude:
+  - README.md
+  - UPUTE.md

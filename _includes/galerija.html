@@ -1,0 +1,29 @@
+{%- comment -%}
+  Galerija: automatski prikazuje SVE slike iz mape zadane u "mapa".
+  Ne treba ništa mijenjati ovdje — samo dodaj slike u mapu na GitHubu.
+{%- endcomment -%}
+{%- assign mapa = include.mapa | default: "slike" -%}
+{%- assign prefiks = "/" | append: mapa | append: "/" -%}
+{%- assign duljina = prefiks | size -%}
+{%- assign sve = site.static_files | sort: "path" -%}
+{%- if include.redoslijed == "obrnuto" -%}{%- assign sve = sve | reverse -%}{%- endif -%}
+
+<div class="galerija">
+  {%- assign broj = 0 -%}
+  {%- for f in sve -%}
+    {%- assign pocetak = f.path | slice: 0, duljina -%}
+    {%- assign ext = f.extname | downcase -%}
+    {%- if pocetak == prefiks -%}
+      {%- if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" or ext == ".gif" or ext == ".avif" -%}
+        {%- assign broj = broj | plus: 1 -%}
+        <div class="slika" data-src="{{ f.path | relative_url }}"{% if site.vodeni_zig != "" %} data-zig="{{ site.vodeni_zig | escape }}"{% endif %} role="button" tabindex="0">
+          <img src="{{ f.path | relative_url }}" alt="{{ f.basename | replace: '-', ' ' | replace: '_', ' ' }}" loading="lazy" decoding="async" draggable="false">
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+{%- if broj == 0 -%}
+  <p class="prazno">Ovdje još nema slika. Dodaj ih u mapu <code>{{ mapa }}</code> na GitHubu.</p>
+{%- endif -%}

@@ -1,0 +1,356 @@
+/* ==========================================================
+   Crno-bijeli stil — boje se mijenjaju ovdje
+   ========================================================== */
+:root {
+  --pozadina: #ffffff;
+  --tekst: #000000;
+  --blijedo: #6b6b6b;
+  --crta: #e5e5e5;
+  --razmak: 14px;          /* razmak između slika */
+  --sirina: 1600px;        /* maksimalna širina stranice */
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--pozadina);
+  color: var(--tekst);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+
+/* ---------- Zaglavlje ---------- */
+.zaglavlje {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: var(--sirina);
+  margin: 0 auto;
+  padding: 28px 40px;
+  background: var(--pozadina);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.izbornik { display: flex; gap: 28px; }
+
+.izbornik a {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+.izbornik a:hover,
+.izbornik a.aktivno { border-bottom-color: var(--tekst); }
+
+.izbornik-gumb {
+  display: none;
+  width: 32px; height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 31;
+}
+.izbornik-gumb span {
+  position: absolute;
+  left: 4px; right: 4px;
+  height: 1.5px;
+  background: var(--tekst);
+  transition: transform .25s, top .25s;
+}
+.izbornik-gumb span:first-child { top: 12px; }
+.izbornik-gumb span:last-child  { top: 19px; }
+.izbornik-otvoren .izbornik-gumb span:first-child { top: 16px; transform: rotate(45deg); }
+.izbornik-otvoren .izbornik-gumb span:last-child  { top: 16px; transform: rotate(-45deg); }
+
+/* ---------- Sadržaj ---------- */
+main {
+  max-width: var(--sirina);
+  margin: 0 auto;
+  padding: 24px 40px 80px;
+}
+
+.naslov-stranice {
+  margin: 0 0 32px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blijedo);
+}
+
+/* ---------- Galerija ---------- */
+.galerija {
+  columns: 3;
+  column-gap: var(--razmak);
+}
+
+.slika {
+  display: block;
+  margin-bottom: var(--razmak);
+  break-inside: avoid;
+  background: #f2f2f2;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+.slika img {
+  width: 100%;
+  transition: opacity .3s;
+}
+.slika:hover img { opacity: .88; }
+
+body.cb .slika img,
+body.cb .lightbox img { filter: grayscale(1); }
+
+.prazno {
+  padding: 80px 0;
+  text-align: center;
+  color: var(--blijedo);
+}
+.prazno code { color: var(--tekst); }
+
+/* ---------- Tekst (Informacije) ---------- */
+.tekst { max-width: 640px; }
+.tekst h2 {
+  margin: 40px 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.tekst p { margin: 0 0 1em; }
+.tekst a { border-bottom: 1px solid currentColor; }
+.tekst img { margin: 24px 0; }
+.tekst code {
+  font-size: 13px;
+  background: #f2f2f2;
+  padding: 1px 5px;
+}
+
+/* ---------- Podnožje ---------- */
+.podnozje {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 32px;
+  max-width: var(--sirina);
+  margin: 0 auto;
+  padding: 48px 40px 56px;
+  border-top: 1px solid var(--crta);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.podnozje h4 {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.podnozje a { display: block; margin-bottom: 6px; color: var(--blijedo); }
+.podnozje a:hover { color: var(--tekst); }
+.potpis { text-align: right; }
+.potpis p { margin: 0 0 4px; }
+.potpis p:first-child { font-weight: 700; }
+
+/* ---------- Povećana slika (lightbox) ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+}
+.lightbox.otvoren { display: flex; }
+.lightbox img {
+  max-width: calc(100vw - 160px);
+  max-height: calc(100vh - 100px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+}
+.lightbox button {
+  position: absolute;
+  border: 0;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  font: 300 30px/1 var(--font);
+  padding: 20px;
+  opacity: .7;
+}
+.lightbox button:hover { opacity: 1; }
+.lb-zatvori { top: 8px; right: 12px; }
+.lb-prethodna { left: 8px; top: 50%; transform: translateY(-50%); }
+.lb-sljedeca  { right: 8px; top: 50%; transform: translateY(-50%); }
+.lb-brojac {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  opacity: .7;
+}
+
+/* ---------- Mobitel i tablet ---------- */
+@media (max-width: 1000px) {
+  .galerija { columns: 2; }
+}
+
+@media (max-width: 700px) {
+  .zaglavlje { padding: 20px 16px; }
+  main { padding: 8px 16px 60px; }
+  .logo { font-size: 17px; }
+
+  .izbornik-gumb { display: block; }
+  .izbornik {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    background: var(--pozadina);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s, visibility .25s;
+  }
+  .izbornik a { font-size: 18px; }
+  .izbornik-otvoren .izbornik { opacity: 1; visibility: visible; }
+
+  .galerija { columns: 1; }
+  :root { --razmak: 10px; }
+
+  .podnozje {
+    grid-template-columns: 1fr 1fr;
+    padding: 40px 16px 48px;
+  }
+  .potpis { grid-column: 1 / -1; text-align: left; }
+
+  .lightbox img { max-width: 100vw; max-height: calc(100vh - 120px); }
+  .lb-prethodna, .lb-sljedeca { top: auto; bottom: 4px; transform: none; }
+}
+
+/* ---------- Kontakt forma ---------- */
+.kontakt { max-width: 560px; }
+.kontakt-uvod { margin: 0 0 36px; }
+
+.forma label { display: block; margin-bottom: 24px; }
+.forma label span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.forma input,
+.forma textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--tekst);
+  border-radius: 0;
+  background: transparent;
+  color: var(--tekst);
+  font: 16px/1.5 var(--font);
+  resize: vertical;
+}
+.forma textarea { border: 1px solid var(--tekst); padding: 12px; }
+.forma input:focus,
+.forma textarea:focus { outline: none; border-width: 2px; }
+.forma input:focus { padding-bottom: 11px; }
+.forma textarea:focus { padding: 11px; }
+
+.forma button {
+  padding: 14px 40px;
+  border: 1px solid var(--tekst);
+  background: var(--tekst);
+  color: var(--pozadina);
+  font: 12px/1 var(--font);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.forma button:hover { background: var(--pozadina); color: var(--tekst); }
+.forma button:disabled { opacity: .5; cursor: wait; }
+
+.forma-status { min-height: 1.6em; margin: 20px 0 0; }
+.skriveno { position: absolute; left: -9999px; }
+
+/* ---------- Zaštita slika (otežava spremanje) ---------- */
+.slika { position: relative; }
+.slika, .lightbox {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;   /* iPhone: nema "Spremi sliku" na dugi pritisak */
+}
+.slika img, .lightbox img {
+  pointer-events: none;          /* klik/desni klik ne pogađa samu sliku */
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+.slika::after {                  /* prozirni sloj preko slike */
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------- Vodeni žig (samo prikaz) ---------- */
+.slika[data-zig]::after,
+.lb-okvir[data-zig]::after {
+  content: attr(data-zig);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px 14px;
+  color: rgba(255, 255, 255, .75);
+  font: 600 11px/1 var(--font);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-shadow: 0 0 3px rgba(0, 0, 0, .45);
+  pointer-events: none;
+}
+.lb-okvir {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+.lb-okvir::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.lb-okvir[data-zig]::after {
+  padding: 18px 20px;
+  font-size: 13px;
+  line-height: 1;
+}

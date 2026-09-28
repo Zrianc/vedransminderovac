@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'hr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.naslov and page.url != '/' %}{{ page.naslov }} — {% endif %}{{ site.naziv }}</title>
+  <meta name="description" content="{{ site.naziv }} — {{ site.opis }}">
+  <meta property="og:title" content="{{ site.naziv }}">
+  <meta property="og:description" content="{{ site.opis }}">
+  <link rel="stylesheet" href="{{ '/assets/stil.css' | relative_url }}">
+</head>
+<body class="{% if site.crno_bijele_slike %}cb{% endif %}"{% if site.vodeni_zig != "" %} data-zig="{{ site.vodeni_zig | escape }}"{% endif %}>
+
+  <header class="zaglavlje">
+    <a class="logo" href="{{ '/' | relative_url }}">{{ site.naziv }}</a>
+
+    <button class="izbornik-gumb" aria-label="Izbornik" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+
+    <nav class="izbornik">
+      {% for s in site.izbornik %}
+        {% assign link = s.link | relative_url %}
+        {% assign trenutna = page.url | relative_url %}
+        <a href="{{ link }}"{% if link == trenutna %} class="aktivno" aria-current="page"{% endif %}>{{ s.naslov }}</a>
+      {% endfor %}
+      {% if site.instagram != "" %}
+        <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="podnozje">
+    <div>
+      <h4>Stranice</h4>
+      {% for s in site.izbornik %}<a href="{{ s.link | relative_url }}">{{ s.naslov }}</a>{% endfor %}
+    </div>
+    <div>
+      <h4>Prati</h4>
+      {% if site.instagram != "" %}<a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
+      {% if site.email != "" %}<a href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}
+    </div>
+    <div class="potpis">
+      <p>{{ site.naziv }}</p>
+      <p>{{ site.opis }}</p>
+      <p>© {{ site.time | date: '%Y' }}</p>
+    </div>
+  </footer>
+
+  <script src="{{ '/assets/galerija.js' | relative_url }}" defer></script>
+</body>
+</html>
