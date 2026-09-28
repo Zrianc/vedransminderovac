@@ -6,7 +6,7 @@
   --tekst: #000000;
   --blijedo: #6b6b6b;
   --crta: #e5e5e5;
-  --razmak: 14px;          /* razmak između slika */
+  --razmak: 48px;          /* razmak između slika (veće = više prostora) */
   --sirina: 1600px;        /* maksimalna širina stranice */
   --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -222,6 +222,7 @@ body.cb .lightbox img { filter: grayscale(1); }
 /* ---------- Mobitel i tablet ---------- */
 @media (max-width: 1000px) {
   .galerija { columns: 2; }
+  :root { --razmak: 32px; }
 }
 
 @media (max-width: 700px) {
@@ -247,7 +248,7 @@ body.cb .lightbox img { filter: grayscale(1); }
   .izbornik-otvoren .izbornik { opacity: 1; visibility: visible; }
 
   .galerija { columns: 1; }
-  :root { --razmak: 10px; }
+  :root { --razmak: 28px; }
 
   .podnozje {
     grid-template-columns: 1fr 1fr;
