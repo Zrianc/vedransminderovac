@@ -2,7 +2,7 @@
   Galerija: automatski prikazuje SVE slike iz mape zadane u "mapa".
   Ne treba ništa mijenjati ovdje — samo dodaj slike u mapu na GitHubu.
 {%- endcomment -%}
-{%- assign mapa = include.mapa | default: "slike" -%}
+{%- assign mapa = include.mapa | default: "slike-crno-bijelo" -%}
 {%- assign prefiks = "/" | append: mapa | append: "/" -%}
 {%- assign duljina = prefiks | size -%}
 {%- assign sve = site.static_files | sort: "path" -%}

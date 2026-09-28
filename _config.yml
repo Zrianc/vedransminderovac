@@ -19,10 +19,12 @@ email: ""
 forma_email: "vedran.sminderovac@gmail.com"
 
 # Izbornik — redoslijed ovdje je redoslijed na stranici.
-# Za novu galeriju: kopiraj galerija.md, promijeni naslov i mapu, dodaj red ovdje.
+# Za novu galeriju: kopiraj boja.html, promijeni naslov i mapu, dodaj red ovdje.
 izbornik:
-  - naslov: "Galerija"
+  - naslov: "Crno-bijelo"
     link: "/"
+  - naslov: "Boja"
+    link: "/boja/"
   - naslov: "Informacije"
     link: "/informacije/"
   - naslov: "Kontakt"

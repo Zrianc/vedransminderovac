@@ -5,32 +5,39 @@
 1. Napravi račun na https://github.com i klikni **New repository**.
    - Ime: npr. `moja-stranica` · označi **Public** · **Create repository**.
 2. Klikni **uploading an existing file**, povuci u prozor SVE datoteke i mape iz ovog paketa
-   (`_config.yml`, `_layouts`, `_includes`, `assets`, `slike`, `index.html`, `informacije.md`) → **Commit changes**.
+   (`_config.yml`, `_layouts`, `_includes`, `assets`, `slike-crno-bijelo`, `slike-boja`,
+   `index.html`, `boja.html`, `informacije.md`, `kontakt.html`) → **Commit changes**.
 3. U repozitoriju: **Settings → Pages** → pod *Branch* odaberi `main` i `/ (root)` → **Save**.
 4. Za 1–2 minute stranica je na `https://TVOJE-KORISNICKO-IME.github.io/moja-stranica/`.
 
 ## 2. Ime, Instagram, e-mail
 
 Otvori `_config.yml` → ikona olovke (**Edit**) → promijeni `naziv`, `opis`, `instagram`, `email` → **Commit changes**.
-Ako želiš da se sve slike prikazuju crno-bijelo, stavi `crno_bijele_slike: true`.
-
 **Vodeni žig:** u `_config.yml` promijeni `vodeni_zig` (npr. `"© Ana Horvat"`). Prikazuje se u donjem desnom kutu
-svake slike, ali samo na stranici — datoteke u mapi `slike` ostaju bez žiga. Za isključivanje stavi `vodeni_zig: ""`.
+svake slike, ali samo na stranici — datoteke u mapama ostaju bez žiga. Za isključivanje stavi `vodeni_zig: ""`.
 
 **Zaštita slika:** desni klik, povlačenje, dugi pritisak na mobitelu i Ctrl+S su onemogućeni na slikama.
 To odvraća obične posjetitelje, ali screenshot uvijek radi — zato stavljaj smanjene slike (~2000 px), a originale čuvaj kod sebe.
 
 ## 3. Dodavanje slika (ovo ćeš raditi najčešće)
 
-1. Otvori mapu **`slike`** u repozitoriju.
+Stranica ima dvije galerije, svaka uzima slike iz svoje mape:
+
+| Galerija | Mapa |
+|---|---|
+| **Crno-bijelo** (početna stranica) | `slike-crno-bijelo` |
+| **Boja** | `slike-boja` |
+
+1. Otvori odgovarajuću mapu u repozitoriju.
 2. **Add file → Upload files** → povuci slike → **Commit changes**.
 3. Za minutu-dvije slike su na stranici. Ništa drugo ne treba dirati.
 
 - **Brisanje slike:** klikni na sliku u mapi → `…` gore desno → **Delete file**.
 - **Redoslijed:** slike idu abecedno po imenu datoteke. Ako želiš određeni redoslijed,
-  preimenuj ih npr. `01-trg.jpg`, `02-kisa.jpg`… U `index.html` možeš staviti `redoslijed: obrnuto`.
+  preimenuj ih npr. `01-trg.jpg`, `02-kisa.jpg`… U `index.html` ili `boja.html` možeš staviti `redoslijed: obrnuto`.
 - **Veličina:** smanji slike prije uploada na ~2000 px po dužoj strani (inače se sporo učitavaju).
   GitHub prima datoteke do 25 MB kroz preglednik.
+- Testne slike (`test-…`) obriši kad ubaciš prave.
 - Na mobitelu radi preko aplikacije **GitHub** ili preglednika (verzija za računalo).
 
 ## 4. Tekst na stranici "Informacije"
