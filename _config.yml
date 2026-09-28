@@ -3,20 +3,20 @@
 # ==========================================================
 
 # Ime koje piše gore lijevo i u naslovu kartice preglednika
-naziv: "IME PREZIME"
+naziv: "Vedran Sminderovac"
 
 # Kratki opis (prikazuje se u podnožju i na Googleu)
-opis: "street photography"
+opis: "umjetnička fotografija"
 
 # Instagram (ostavi prazno "" ako ga ne želiš prikazati)
-instagram: "https://www.instagram.com/"
+instagram: "https://www.instagram.com/vedran.sminderovac/"
 
 # E-mail za kontakt (ostavi prazno "" ako ga ne želiš prikazati)
 email: ""
 
 # E-mail na koji stižu poruke iz forme za kontakt (stranica Kontakt).
 # Prvi put kad netko pošalje poruku, na ovu adresu stiže mail za aktivaciju — klikni "Activate".
-forma_email: "tvoj@email.com"
+forma_email: "vedran.sminderovac@gmail.com"
 
 # Izbornik — redoslijed ovdje je redoslijed na stranici.
 # Za novu galeriju: kopiraj galerija.md, promijeni naslov i mapu, dodaj red ovdje.
