@@ -33,6 +33,20 @@ Obje jezične verzije koriste **iste slike** — ubaciš ih jednom.
 - **Veličina:** JPG, duža stranica ~2000 px, kvaliteta ~82 %, sRGB.
 - Testne slike (`test-…`) obriši kad ubaciš prave.
 
+## Galerije: mozaik
+
+Na stranicama **Crno-bijelo** i **Boja** na ekranu je odjednom 10 slika (bez scrollanja),
+a svakih 3 sekunde jedna se polako zamijeni drugom iz mape — tako se izmijene sve slike.
+Klik na sliku otvara je cijelu, preko cijelog ekrana (strelice / povlačenje prstom za ostale).
+Kad je miš na slici, ta se slika ne mijenja.
+
+U mozaiku su slike **izrezane** da stanu u jednake okvire; u povećanom prikazu vidi se cijela slika.
+
+Postavke u `_config.yml`:
+- `mozaik_broj: 10` — koliko slika je odjednom na ekranu
+- `mozaik_sekunde: 3` — brzina izmjene
+- `galerija_nacin: "mreza"` — vraća klasičnu galeriju (sve slike, scroll)
+
 ## 3. Tekstovi
 
 - **Početna, Info, Kontakt:** otvori `.md` datoteku (HR u glavnoj mapi, EN u mapi `en`) → olovka **Edit** → piši.

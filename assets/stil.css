@@ -203,6 +203,7 @@ body.cb .lightbox img { filter: grayscale(1); }
 .podnozje a:hover { color: var(--tekst); }
 .potpis { text-align: right; }
 .potpis p { margin: 0 0 4px; }
+.potpis .izradio { margin-top: 14px; font-size: 10px; letter-spacing: .14em; color: var(--blijedo); }
 .potpis .potpis-ime {
   font-family: var(--font-naslovi, var(--font));
   font-size: 18px;
@@ -461,4 +462,48 @@ body.cb .zasticeno img { filter: grayscale(1); }
   .pocetna, .info { grid-template-columns: 1fr; gap: 36px; min-height: 0; }
   .pocetna-slika img { max-height: none; }
   .info-slika { position: static; max-width: 420px; order: -1; }
+}
+
+/* ---------- Mozaik (slike se same mijenjaju, svaka u svom formatu) ---------- */
+.stranica-crno-bijelo, .stranica-boja { padding-bottom: 28px; }
+.mozaik { position: relative; }
+.mz-mreza {
+  display: grid;
+  grid-template-columns: repeat(var(--stupci, 5), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--redovi, 2), minmax(0, 1fr));
+  gap: 28px 36px;
+  height: 100%;
+}
+.mz-plocica {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.mz-plocica img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;          /* cijela slika, bez rezanja — svaka u svom formatu */
+  object-position: var(--poz, center);
+  opacity: 0;
+  transition: opacity .9s ease, transform .6s ease;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.mz-plocica img.vidljiva { opacity: 1; }
+.mz-plocica:hover img.vidljiva { transform: scale(1.02); }
+.mz-plocica:focus-visible { outline: 1px solid var(--tekst); outline-offset: 4px; }
+body.cb .mz-plocica img { filter: grayscale(1); }
+
+@media (max-width: 700px) {
+  .mz-mreza { gap: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mz-plocica img { transition: none; }
 }

@@ -7,6 +7,9 @@
 # Ime koje piše gore lijevo i u naslovu kartice preglednika
 naziv: "Vedran Sminderovac"
 
+# Tko je napravio stranicu (piše sitno u podnožju). Prazno "" = ne prikazuj.
+izradio: "Zrinac"
+
 # Instagram (ostavi prazno "" ako ga ne želiš prikazati)
 instagram: "https://www.instagram.com/vedran.sminderovac/"
 
@@ -19,6 +22,13 @@ forma_email: "vedran.sminderovac@gmail.com"
 #   font_link: link na font (Fontshare ili Google Fonts); prazno "" ako nije potreban
 font_naslovi: "Bebas Neue"
 font_link: "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+
+# Galerije (Crno-bijelo i Boja):
+#   "mozaik" = na ekranu je odjednom nekoliko slika i same se polako mijenjaju (bez scrollanja)
+#   "mreza"  = sve slike jedna ispod druge (scroll)
+galerija_nacin: "mozaik"
+mozaik_broj: 10        # koliko slika je odjednom na ekranu
+mozaik_sekunde: 3      # svakih koliko sekundi se jedna slika zamijeni
 
 # Vodeni žig preko slika (samo na prikazu). Prazno "" = bez žiga.
 vodeni_zig: ""

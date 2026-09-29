@@ -1,6 +1,14 @@
 ---
 layout: default
 ---
-{%- comment -%} Stranica samo s fotografijama. Mapa se zadaje u stranici (crno-bijelo.md, boja.md, en/...). {%- endcomment -%}
+{%- comment -%}
+  Stranica samo s fotografijama. Mapa se zadaje u stranici (crno-bijelo.md, boja.md, en/...).
+  Način prikaza bira se u _config.yml:  galerija_nacin: "mozaik" (slike se same mijenjaju) ili "mreza" (sve slike, scroll).
+{%- endcomment -%}
 <h1 class="sr">{{ page.naslov }}</h1>
+{% if site.galerija_nacin == "mreza" %}
 {% include galerija.html mapa=page.mapa redoslijed=page.redoslijed %}
+{% else %}
+{% include mozaik.html mapa=page.mapa redoslijed=page.redoslijed %}
+<script src="{{ '/assets/mozaik.js' | relative_url }}" defer></script>
+{% endif %}

@@ -1,6 +1,7 @@
 # Sitni natpisi na stranici, na oba jezika.
 hr:
   zanimanje: "fotograf"
+  izrada: "Izrada stranice"
   jezik: "Hrvatski"
   izbornik: "Izbornik"
   stranice: "Stranice"
@@ -20,6 +21,7 @@ hr:
   forma_lokalno: "Forma radi samo na objavljenoj stranici, ne kad se datoteka otvori s računala."
 en:
   zanimanje: "photographer"
+  izrada: "Website by"
   jezik: "English"
   izbornik: "Menu"
   stranice: "Pages"
