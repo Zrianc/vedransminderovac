@@ -36,15 +36,19 @@ Obje jezične verzije koriste **iste slike** — ubaciš ih jednom.
 ## Galerije: mozaik
 
 Na stranicama **Crno-bijelo** i **Boja** na ekranu je odjednom 10 slika (bez scrollanja),
-a svakih 3 sekunde jedna se polako zamijeni drugom iz mape — tako se izmijene sve slike.
+a svakih 8 sekundi jedna se polako pretopi (fade) u drugu iz mape — tako se izmijene sve slike.
 Klik na sliku otvara je cijelu, preko cijelog ekrana (strelice / povlačenje prstom za ostale).
 Kad je miš na slici, ta se slika ne mijenja.
 
-U mozaiku su slike **izrezane** da stanu u jednake okvire; u povećanom prikazu vidi se cijela slika.
+Slike se prikazuju **cijele, u svom formatu** (bez rezanja).
+**Ista slika nikad nije dvaput na ekranu:** slike koje nisu prikazane čekaju u redu i ulaze redom,
+a slika koja izađe ide na kraj reda. Zato je dobro da u mapi bude više slika nego što ih stane na ekran
+(npr. 20 slika za 10 mjesta). Ako je slika u mapi manje ili jednako `mozaik_broj`, sve su na ekranu i ništa se ne mijenja.
 
 Postavke u `_config.yml`:
 - `mozaik_broj: 10` — koliko slika je odjednom na ekranu
-- `mozaik_sekunde: 3` — brzina izmjene
+- `mozaik_sekunde: 8` — svakih koliko sekundi se jedna slika zamijeni (veće = sporije)
+- `mozaik_fade: 2.5` — koliko sekundi traje pretapanje
 - `galerija_nacin: "mreza"` — vraća klasičnu galeriju (sve slike, scroll)
 
 ## 3. Tekstovi

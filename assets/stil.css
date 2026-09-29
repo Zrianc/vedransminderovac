@@ -492,7 +492,7 @@ body.cb .zasticeno img { filter: grayscale(1); }
   object-fit: contain;          /* cijela slika, bez rezanja — svaka u svom formatu */
   object-position: var(--poz, center);
   opacity: 0;
-  transition: opacity .9s ease, transform .6s ease;
+  transition: opacity var(--fade, 2.5s) ease-in-out, transform .6s ease;
   pointer-events: none;
   -webkit-user-drag: none;
 }
