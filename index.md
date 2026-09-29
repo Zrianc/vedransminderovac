@@ -1,4 +1,6 @@
 ---
+# Opis stranice za Google (1–2 rečenice, do ~160 znakova):
+opis: "Vedran Sminderovac, fotograf iz Zagreba. Ulična fotografija u crno-bijeloj tehnici i u boji — geometrija grada i neponovljivi trenuci svakodnevice."
 layout: pocetna
 jezik: hr
 kljuc: pocetna

@@ -512,3 +512,7 @@ body.cb .mz-plocica img { filter: grayscale(1); }
 @media (prefers-reduced-motion: reduce) {
   .mz-plocica img { transition: none; }
 }
+
+/* ---------- 404 ---------- */
+.stranica-404 { min-height: 50vh; }
+.stranica-404 a { border-bottom: 1px solid currentColor; }

@@ -17,14 +17,25 @@
       {%- assign ext = f.extname | downcase -%}
       {%- if pocetak == prefiks -%}
         {%- if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" or ext == ".avif" -%}
-          {%- assign broj = broj | plus: 1 %}
-    <li data-src="{{ f.path | relative_url }}" data-alt="{{ f.basename | replace: '-', ' ' | replace: '_', ' ' }}"></li>
+          {%- assign broj = broj | plus: 1 -%}
+          {%- assign ime = f.basename | replace: '_', '-' -%}{%- assign p2 = ime | slice: 0, 2 | plus: 0 -%}{%- assign z3 = ime | slice: 2, 1 -%}{%- if p2 > 0 and z3 == "-" -%}{%- assign ime = ime | slice: 3, 200 -%}{%- endif -%}{%- assign alt = ime | replace: '-', ' ' | append: " — " | append: site.naziv -%}
+    <li data-src="{{ f.path | relative_url }}" data-alt="{{ alt | escape }}"></li>
         {%- endif -%}
       {%- endif -%}
     {%- endfor %}
   </ul>
   <noscript>
-    <p>JavaScript je potreban za prikaz galerije.</p>
+    {%- comment -%} Bez JavaScripta (i za tražilice): sve slike kao obična galerija {%- endcomment -%}
+    <div class="galerija">
+      {%- for f in sve -%}
+        {%- assign pocetak = f.path | slice: 0, duljina -%}
+        {%- assign ext = f.extname | downcase -%}
+        {%- if pocetak == prefiks -%}{%- if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" or ext == ".avif" -%}
+        {%- assign ime = f.basename | replace: '_', '-' -%}{%- assign p2 = ime | slice: 0, 2 | plus: 0 -%}{%- assign z3 = ime | slice: 2, 1 -%}{%- if p2 > 0 and z3 == "-" -%}{%- assign ime = ime | slice: 3, 200 -%}{%- endif -%}{%- assign alt = ime | replace: '-', ' ' | append: " — " | append: site.naziv -%}
+      <div class="slika"><img src="{{ f.path | relative_url }}" alt="{{ alt | escape }}" loading="lazy"></div>
+        {%- endif -%}{%- endif -%}
+      {%- endfor %}
+    </div>
   </noscript>
 </div>
 

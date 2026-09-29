@@ -7,14 +7,25 @@
 # Ime koje piše gore lijevo i u naslovu kartice preglednika
 naziv: "Vedran Sminderovac"
 
+# Adresa stranice (za Google, dijeljenje linkova i sitemap) — bez / na kraju
+url: "https://vedransminderovac.com"
+baseurl: ""
+
+# Kod za potvrdu u Google Search Console (samo ako biraš metodu "HTML tag"; inače ostavi prazno)
+google_potvrda: ""
+
 # Tko je napravio stranicu (piše sitno u podnožju). Prazno "" = ne prikazuj.
 izradio: "Zrinac"
 
 # Instagram (ostavi prazno "" ako ga ne želiš prikazati)
 instagram: "https://www.instagram.com/vedran.sminderovac/"
 
-# E-mail na koji stižu poruke iz forme za kontakt.
-# Prvi put stiže mail za aktivaciju od FormSubmita — klikni "Activate Form".
+# Forma za kontakt — poruke se šalju preko servisa Web3Forms.
+# Ključ se dobije besplatno na https://web3forms.com (upiše se e-mail na koji trebaju stizati poruke).
+web3forms_kljuc: "66b86cd8-297e-4508-8ce0-8781414ee06c"
+# Ime pošiljatelja koje piše u mailu (umjesto "FormSubmit")
+forma_posiljatelj: "Web stranica – Vedran Sminderovac"
+# Rezerva: ako je ključ prazan, forma koristi FormSubmit na ovu adresu.
 forma_email: "vedran.sminderovac@gmail.com"
 
 # Font za ime i naslove. Mijenja se ovdje — vidi UPUTE.md (dio "Font").

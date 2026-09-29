@@ -10,13 +10,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.naslov and page.kljuc != "pocetna" %}{{ page.naslov }} — {% endif %}{{ site.naziv }} · {{ t.zanimanje }}</title>
-  <meta name="description" content="{{ site.naziv }} — {{ t.zanimanje }}">
-  <meta property="og:title" content="{{ site.naziv }}">
-  <meta property="og:description" content="{{ site.naziv }} — {{ t.zanimanje }}">
-  {%- if link_hr %}<link rel="alternate" hreflang="hr" href="{{ link_hr.url | relative_url }}">{% endif %}
-  {%- if link_en %}<link rel="alternate" hreflang="en" href="{{ link_en.url | relative_url }}">{% endif %}
+  {% include seo.html %}
   {%- if site.font_link != "" %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="{{ site.font_link }}">
   {%- endif %}
   <link rel="stylesheet" href="{{ '/assets/stil.css' | relative_url }}">

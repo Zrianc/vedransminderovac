@@ -1,0 +1,131 @@
+{%- comment -%}
+  SEO: naslov, opis, kanonski link, jezične verzije (hreflang), pregled za dijeljenje (Open Graph / Twitter),
+  ikonice i strukturirani podaci (JSON-LD) za Google. Ne treba mijenjati — tekstovi dolaze iz stranica i _config.yml.
+{%- endcomment -%}
+{%- assign jezik = page.jezik | default: "hr" -%}
+{%- assign t = site.data.tekstovi[jezik] -%}
+{%- assign isti_kljuc = site.pages | where: "kljuc", page.kljuc -%}
+{%- assign seo_hr = isti_kljuc | where: "jezik", "hr" | first -%}
+{%- assign seo_en = isti_kljuc | where: "jezik", "en" | first -%}
+
+{%- if page.kljuc == "pocetna" or page.naslov == nil -%}
+  {%- assign seo_naslov = site.naziv | append: " · " | append: t.zanimanje | append: ", Zagreb" -%}
+{%- else -%}
+  {%- assign seo_naslov = page.naslov | append: " — " | append: site.naziv | append: " · " | append: t.zanimanje -%}
+{%- endif -%}
+{%- assign seo_opis = page.opis | default: t.opis_stranice | strip_newlines | strip -%}
+{%- assign seo_url = page.url | replace: "index.html", "" | absolute_url -%}
+
+{%- comment -%} Slika za dijeljenje: prva slika galerije / Info / naslovne {%- endcomment -%}
+{%- if page.mapa -%}{%- assign seo_mapa = page.mapa -%}
+{%- elsif page.kljuc == "info" -%}{%- assign seo_mapa = "slika-info" -%}
+{%- else -%}{%- assign seo_mapa = "slika-naslovna" -%}{%- endif -%}
+{%- assign seo_prefiks = "/" | append: seo_mapa | append: "/" -%}
+{%- assign seo_duljina = seo_prefiks | size -%}
+{%- assign seo_slika = nil -%}
+{%- assign seo_sve = site.static_files | sort: "path" -%}
+{%- for f in seo_sve -%}
+  {%- assign poc = f.path | slice: 0, seo_duljina -%}
+  {%- assign ext = f.extname | downcase -%}
+  {%- if poc == seo_prefiks and seo_slika == nil -%}
+    {%- if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" -%}{%- assign seo_slika = f.path -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if seo_slika == nil -%}
+  {%- for f in seo_sve -%}
+    {%- assign poc = f.path | slice: 0, 16 -%}
+    {%- if poc == "/slika-naslovna/" and seo_slika == nil -%}{%- assign seo_slika = f.path -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+  <title>{{ seo_naslov }}</title>
+  <meta name="description" content="{{ seo_opis | escape }}">
+  <meta name="author" content="{{ site.naziv }}">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="{{ seo_url }}">
+  {%- if seo_hr %}
+  <link rel="alternate" hreflang="hr" href="{{ seo_hr.url | absolute_url }}">
+  <link rel="alternate" hreflang="x-default" href="{{ seo_hr.url | absolute_url }}">
+  {%- endif %}
+  {%- if seo_en %}
+  <link rel="alternate" hreflang="en" href="{{ seo_en.url | absolute_url }}">
+  {%- endif %}
+
+  <!-- Pregled kad se link dijeli (Facebook, WhatsApp, Viber, LinkedIn, X…) -->
+  <meta property="og:type" content="{% if page.kljuc == 'pocetna' %}profile{% else %}website{% endif %}">
+  <meta property="og:site_name" content="{{ site.naziv }}">
+  <meta property="og:title" content="{{ seo_naslov }}">
+  <meta property="og:description" content="{{ seo_opis | escape }}">
+  <meta property="og:url" content="{{ seo_url }}">
+  <meta property="og:locale" content="{% if jezik == 'en' %}en_GB{% else %}hr_HR{% endif %}">
+  <meta property="og:locale:alternate" content="{% if jezik == 'en' %}hr_HR{% else %}en_GB{% endif %}">
+  {%- if seo_slika %}
+  <meta property="og:image" content="{{ seo_slika | absolute_url }}">
+  <meta property="og:image:alt" content="{{ site.naziv }} — {{ t.zanimanje }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ seo_slika | absolute_url }}">
+  {%- else %}
+  <meta name="twitter:card" content="summary">
+  {%- endif %}
+  <meta name="twitter:title" content="{{ seo_naslov }}">
+  <meta name="twitter:description" content="{{ seo_opis | escape }}">
+  {%- if page.kljuc == "pocetna" %}
+  <meta property="profile:first_name" content="{{ site.naziv | split: ' ' | first }}">
+  <meta property="profile:last_name" content="{{ site.naziv | split: ' ' | last }}">
+  {%- endif %}
+
+  <!-- Ikonice -->
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="32x32">
+  <link rel="icon" href="{{ '/assets/ikona.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
+  <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+  <meta name="theme-color" content="#ffffff">
+  {%- if site.google_potvrda and site.google_potvrda != "" %}
+  <meta name="google-site-verification" content="{{ site.google_potvrda }}">
+  {%- endif %}
+
+  <!-- Strukturirani podaci za Google (tko je autor, što je stranica) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "{{ '/' | absolute_url }}#osoba",
+        "name": "{{ site.naziv }}",
+        "jobTitle": "{{ t.zanimanje | capitalize }}",
+        "url": "{{ '/' | absolute_url }}",
+        {%- if seo_slika %}
+        "image": "{{ seo_slika | absolute_url }}",
+        {%- endif %}
+        "birthPlace": "Zagreb",
+        "address": { "@type": "PostalAddress", "addressLocality": "Zagreb", "addressCountry": "HR" },
+        "memberOf": { "@type": "Organization", "name": "Fotoklub Zagreb", "url": "https://www.fotoklubzagreb.hr/" },
+        "knowsAbout": ["{% if jezik == 'en' %}Street photography{% else %}Ulična fotografija{% endif %}", "{% if jezik == 'en' %}Black and white photography{% else %}Crno-bijela fotografija{% endif %}"]
+        {%- if site.instagram != "" %},
+        "sameAs": ["{{ site.instagram }}"]
+        {%- endif %}
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ '/' | absolute_url }}#web",
+        "url": "{{ '/' | absolute_url }}",
+        "name": "{{ site.naziv }}",
+        "inLanguage": ["hr", "en"],
+        "author": { "@id": "{{ '/' | absolute_url }}#osoba" }
+      },
+      {
+        "@type": "{% if page.mapa %}ImageGallery{% elsif page.kljuc == 'info' %}ProfilePage{% elsif page.kljuc == 'kontakt' %}ContactPage{% else %}WebPage{% endif %}",
+        "url": "{{ seo_url }}",
+        "name": "{{ seo_naslov }}",
+        "description": "{{ seo_opis | escape }}",
+        "inLanguage": "{{ jezik }}",
+        "isPartOf": { "@id": "{{ '/' | absolute_url }}#web" },
+        {%- if page.kljuc == "info" %}
+        "mainEntity": { "@id": "{{ '/' | absolute_url }}#osoba" },
+        {%- endif %}
+        "author": { "@id": "{{ '/' | absolute_url }}#osoba" }
+      }
+    ]
+  }
+  </script>

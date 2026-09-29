@@ -7,8 +7,15 @@ layout: default
   <h1 class="naslov-stranice">{{ page.naslov }}</h1>
   <div class="kontakt-uvod">{{ content }}</div>
 
-  <form class="forma" action="https://formsubmit.co/{{ site.forma_email }}" method="POST"
-        data-ajax="https://formsubmit.co/ajax/{{ site.forma_email }}"
+  {%- if site.web3forms_kljuc and site.web3forms_kljuc != "" %}
+  {%- assign servis = "web3forms" %}
+  {%- assign adresa = "https://api.web3forms.com/submit" %}
+  {%- else %}
+  {%- assign servis = "formsubmit" %}
+  {%- assign adresa = "https://formsubmit.co/ajax/" | append: site.forma_email %}
+  {%- endif %}
+  <form class="forma" action="{{ adresa }}" method="POST"
+        data-ajax="{{ adresa }}" data-servis="{{ servis }}"
         data-saljem="{{ t.forma_saljem }}" data-gumb="{{ t.forma_gumb }}"
         data-ok="{{ t.forma_ok }}" data-aktivacija="{{ t.forma_aktivacija }}"
         data-greska="{{ t.forma_greska }}" data-mreza="{{ t.forma_mreza }}"
@@ -26,10 +33,17 @@ layout: default
       <textarea name="Poruka" rows="7" required></textarea>
     </label>
 
-    <!-- Postavke servisa FormSubmit (ne mijenjati) -->
+    <!-- Postavke servisa za slanje (ne mijenjati) -->
+    {%- if servis == "web3forms" %}
+    <input type="hidden" name="access_key" value="{{ site.web3forms_kljuc }}">
+    <input type="hidden" name="subject" value="{{ t.forma_naslov_maila }} {{ site.naziv }}">
+    <input type="hidden" name="from_name" value="{{ site.forma_posiljatelj | default: site.naziv }}">
+    <input type="checkbox" name="botcheck" class="skriveno" tabindex="-1" autocomplete="off">
+    {%- else %}
     <input type="hidden" name="_subject" value="{{ t.forma_naslov_maila }} {{ site.naziv }}">
     <input type="hidden" name="_template" value="table">
     <input type="text" name="_honey" class="skriveno" tabindex="-1" autocomplete="off">
+    {%- endif %}
 
     <button type="submit">{{ t.forma_gumb }}</button>
     <p class="forma-status" role="status" aria-live="polite"></p>

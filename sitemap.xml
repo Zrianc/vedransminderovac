@@ -1,0 +1,40 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+{%- assign stranice = site.pages | where_exp: "p", "p.kljuc" | sort: "url" %}
+{%- assign sve_datoteke = site.static_files | sort: "path" %}
+{%- for p in stranice %}
+  {%- assign par = site.pages | where: "kljuc", p.kljuc %}
+  {%- assign p_hr = par | where: "jezik", "hr" | first %}
+  {%- assign p_en = par | where: "jezik", "en" | first %}
+  <url>
+    <loc>{{ p.url | absolute_url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <priority>{% if p.kljuc == "pocetna" %}1.0{% elsif p.mapa %}0.9{% else %}0.7{% endif %}</priority>
+    {%- if p_hr %}
+    <xhtml:link rel="alternate" hreflang="hr" href="{{ p_hr.url | absolute_url }}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ p_hr.url | absolute_url }}"/>
+    {%- endif %}
+    {%- if p_en %}
+    <xhtml:link rel="alternate" hreflang="en" href="{{ p_en.url | absolute_url }}"/>
+    {%- endif %}
+    {%- if p.mapa %}{% assign mapa = p.mapa %}{% elsif p.kljuc == "pocetna" %}{% assign mapa = "slika-naslovna" %}{% elsif p.kljuc == "info" %}{% assign mapa = "slika-info" %}{% else %}{% assign mapa = "" %}{% endif %}
+    {%- if mapa != "" %}
+      {%- assign prefiks = "/" | append: mapa | append: "/" %}
+      {%- assign duljina = prefiks | size %}
+      {%- for f in sve_datoteke %}
+        {%- assign poc = f.path | slice: 0, duljina %}
+        {%- assign ext = f.extname | downcase %}
+        {%- if poc == prefiks %}{% if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" %}
+    <image:image><image:loc>{{ f.path | absolute_url }}</image:loc></image:image>
+        {%- endif %}{% endif %}
+      {%- endfor %}
+    {%- endif %}
+  </url>
+{%- endfor %}
+</urlset>

@@ -2,6 +2,9 @@
 hr:
   zanimanje: "fotograf"
   izrada: "Izrada stranice"
+  opis_stranice: "Vedran Sminderovac, fotograf iz Zagreba — ulična fotografija u crno-bijeloj tehnici i u boji."
+  nema_stranice: "Ova stranica ne postoji."
+  na_pocetnu: "Na početnu"
   jezik: "Hrvatski"
   izbornik: "Izbornik"
   stranice: "Stranice"
@@ -22,6 +25,9 @@ hr:
 en:
   zanimanje: "photographer"
   izrada: "Website by"
+  opis_stranice: "Vedran Sminderovac, photographer from Zagreb, Croatia — street photography in black and white and colour."
+  nema_stranice: "This page does not exist."
+  na_pocetnu: "Back to home"
   jezik: "English"
   izbornik: "Menu"
   stranice: "Pages"

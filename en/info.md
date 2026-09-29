@@ -1,4 +1,6 @@
 ---
+# Opis stranice za Google (1–2 rečenice, do ~160 znakova):
+opis: "Biography, solo exhibitions and awards of Croatian photographer Vedran Sminderovac, member of Fotoklub Zagreb."
 layout: info
 jezik: en
 kljuc: info

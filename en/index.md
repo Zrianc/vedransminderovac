@@ -1,4 +1,6 @@
 ---
+# Opis stranice za Google (1–2 rečenice, do ~160 znakova):
+opis: "Vedran Sminderovac, photographer from Zagreb, Croatia. Street photography in black and white and colour — the geometry of the city and unrepeatable moments of everyday life."
 layout: pocetna
 jezik: en
 kljuc: pocetna

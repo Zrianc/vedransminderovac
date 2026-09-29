@@ -23,10 +23,15 @@
     gumb.disabled = true;
     gumb.textContent = d.saljem;
 
+    var podaci = new FormData(forma);
+    if (d.servis === 'web3forms') {
+      podaci.set('replyto', podaci.get('email') || '');   // "Odgovori" u mailu ide pošiljatelju
+    }
+
     fetch(d.ajax, {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
-      body: new FormData(forma)
+      body: podaci
     })
       .then(function (r) { return r.json(); })
       .then(function (odg) {

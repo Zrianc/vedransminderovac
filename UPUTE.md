@@ -81,17 +81,46 @@ Za povratak na Helveticu: `font_naslovi: "Helvetica Neue"` i `font_link: ""`.
    - **CNAME**, host `www` → `KORISNICKO-IME.github.io`
 3. Kad GitHub pokaže zelenu kvačicu, uključi **Enforce HTTPS**.
 
-## 6. Forma za kontakt
+## 6. Forma za kontakt (Web3Forms)
 
-Poruke stižu na adresu iz `forma_email` u `_config.yml` preko servisa FormSubmit.
-Prva poruka pokreće aktivaciju: vlasniku stiže mail „Activate Form“ — klikne link **iz najnovijeg** maila, jednom.
+Poruke s forme šalju se preko besplatnog servisa **Web3Forms** (do 250 poruka mjesečno).
 
-## 7. Zaštita slika i vodeni žig
+1. Otvori https://web3forms.com → **Create Access Key**.
+2. Upiši e-mail na koji trebaju stizati poruke (Vedranov) → ključ stiže na taj mail.
+3. U `_config.yml` zalijepi ključ: `web3forms_kljuc: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"` → **Commit changes**.
+4. Pošalji probnu poruku sa stranice **Kontakt** — stiže odmah, bez ikakve aktivacije.
+
+Kad Vedran klikne **Odgovori** na takav mail, odgovor ide osobi koja je poslala poruku.
+(Ako je `web3forms_kljuc` prazan, forma koristi stari servis FormSubmit na adresu iz `forma_email`.)
+
+## 7. SEO (Google) — sve je već ugrađeno
+
+- **Naslov i opis** svake stranice na oba jezika → opis se mijenja u retku `opis:` na vrhu svake `.md` datoteke (do ~160 znakova).
+- **Jezične verzije** (hreflang) — Google zna da su `/boja/` i `/en/colour/` ista stranica na dva jezika.
+- **Sitemap** sa svim stranicama i svim fotografijama: `https://vedransminderovac.com/sitemap.xml` (sam se osvježava).
+- **robots.txt**, **favicon** (crno V), **stranica 404**.
+- **Pregled pri dijeljenju linka** (Facebook, WhatsApp, Viber…): naslov, opis i prva fotografija te stranice.
+- **Strukturirani podaci** o Vedranu (fotograf, Zagreb, Fotoklub Zagreb, Instagram).
+- **Opis svake fotografije** radi se iz imena datoteke: `03-biciklist-u-dezju.jpg` → „biciklist u dezju — Vedran Sminderovac“.
+  Zato je dobro fotke nazvati opisno (vidi „Dodavanje slika“).
+
+### Prijava u Google Search Console (jednom, ~10 minuta)
+
+1. Otvori https://search.google.com/search-console → **Add property** → **Domain** → upiši `vedransminderovac.com`.
+2. Google pokaže **TXT zapis** (`google-site-verification=...`). Kopiraj ga.
+3. Spaceship → **Advanced DNS** → **Add record** → **TXT**, Host `@`, Value = zalijepljeni tekst → **Add**.
+4. Vrati se u Search Console → **Verify** (ako ne prođe odmah, pokušaj za 10–30 min).
+5. Lijevo **Sitemaps** → upiši `sitemap.xml` → **Submit**.
+
+Google obično za 1–2 tjedna počne prikazivati stranicu na „Vedran Sminderovac“.
+Najviše pomaže: link na stranicu u Instagram biografiji, te linkovi s Fotokluba Zagreb i članaka o izložbama.
+
+## 8. Zaštita slika i vodeni žig
 
 Desni klik, povlačenje, dugi pritisak na mobitelu i Ctrl+S su onemogućeni na svim slikama.
 Screenshot uvijek radi — zato na stranicu idu smanjene slike, a originali ostaju kod autora.
 Vodeni žig: `vodeni_zig: "© Vedran Sminderovac"` u `_config.yml` (prazno `""` = bez žiga).
 
-## 8. Boje i razmaci
+## 9. Boje i razmaci
 
 Na vrhu `assets/stil.css` (dio `:root`): boje, `--razmak` između slika (48px), širina stranice.
