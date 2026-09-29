@@ -1,0 +1,22 @@
+{%- comment -%}
+  Prikazuje PRVU sliku (po imenu datoteke) iz zadane mape. Ako je mapa prazna, ne prikazuje ništa.
+  Za promjenu slike: obriši staru i ubaci novu u mapu.
+{%- endcomment -%}
+{%- assign prefiks = "/" | append: include.mapa | append: "/" -%}
+{%- assign duljina = prefiks | size -%}
+{%- assign nadjena = nil -%}
+{%- assign sve = site.static_files | sort: "path" -%}
+{%- for f in sve -%}
+  {%- assign pocetak = f.path | slice: 0, duljina -%}
+  {%- assign ext = f.extname | downcase -%}
+  {%- if pocetak == prefiks and nadjena == nil -%}
+    {%- if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" or ext == ".avif" -%}
+      {%- assign nadjena = f -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if nadjena -%}
+<figure class="{{ include.klasa }} zasticeno"{% if site.vodeni_zig != "" %} data-zig="{{ site.vodeni_zig | escape }}"{% endif %}>
+  <img src="{{ nadjena.path | relative_url }}" alt="{{ site.naziv }}" draggable="false">
+</figure>
+{%- endif -%}

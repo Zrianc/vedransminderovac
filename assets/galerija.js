@@ -9,6 +9,16 @@
     });
   }
 
+  // ----- Zaštita: bez desnog klika, povlačenja i Ctrl+S na slikama -----
+  function blokiraj(e) {
+    if (e.target.closest && e.target.closest('.galerija, .lightbox, .zasticeno')) e.preventDefault();
+  }
+  document.addEventListener('contextmenu', blokiraj);
+  document.addEventListener('dragstart', blokiraj);
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) e.preventDefault();
+  });
+
   // ----- Lightbox -----
   var linkovi = Array.prototype.slice.call(document.querySelectorAll('.galerija .slika'));
   if (!linkovi.length) return;
@@ -56,16 +66,6 @@
     a.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); otvori(i); }
     });
-  });
-
-  // ----- Zaštita: bez desnog klika, povlačenja i Ctrl+S na slikama -----
-  function blokiraj(e) {
-    if (e.target.closest && e.target.closest('.galerija, .lightbox')) e.preventDefault();
-  }
-  document.addEventListener('contextmenu', blokiraj);
-  document.addEventListener('dragstart', blokiraj);
-  document.addEventListener('keydown', function (e) {
-    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) e.preventDefault();
   });
 
   lb.querySelector('.lb-zatvori').addEventListener('click', zatvori);

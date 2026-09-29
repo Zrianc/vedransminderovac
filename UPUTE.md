@@ -1,89 +1,78 @@
-# Upute — foto stranica na GitHub Pagesu
+# Upute — stranica Vedran Sminderovac (GitHub Pages)
+
+## Što je gdje
+
+| Stranica | HR adresa | EN adresa | Tekst se mijenja u | Slike idu u mapu |
+|---|---|---|---|---|
+| Početna | `/` | `/en/` | `index.md` · `en/index.md` | `slika-naslovna` (1 slika) |
+| Crno-bijelo | `/crno-bijelo/` | `/en/black-and-white/` | — | `slike-crno-bijelo` |
+| Boja | `/boja/` | `/en/colour/` | — | `slike-boja` |
+| Info | `/info/` | `/en/info/` | `info.md` · `en/info.md` | `slika-info` (1 slika, nije obavezna) |
+| Kontakt | `/kontakt/` | `/en/contact/` | `kontakt.md` · `en/contact.md` | — |
+
+Obje jezične verzije koriste **iste slike** — ubaciš ih jednom.
 
 ## 1. Prvo postavljanje (jednom)
 
-1. Napravi račun na https://github.com i klikni **New repository**.
-   - Ime: npr. `moja-stranica` · označi **Public** · **Create repository**.
-2. Klikni **uploading an existing file**, povuci u prozor SVE datoteke i mape iz ovog paketa
-   (`_config.yml`, `_layouts`, `_includes`, `assets`, `slike-crno-bijelo`, `slike-boja`,
-   `index.html`, `boja.html`, `informacije.md`, `kontakt.html`) → **Commit changes**.
-3. U repozitoriju: **Settings → Pages** → pod *Branch* odaberi `main` i `/ (root)` → **Save**.
-4. Za 1–2 minute stranica je na `https://TVOJE-KORISNICKO-IME.github.io/moja-stranica/`.
+1. Na https://github.com klikni **New repository** → ime npr. `web` · **Public** · **Create repository**.
+2. Klikni **uploading an existing file** i povuci u prozor **sve što je unutar mape `web-stranica`**
+   (ne samu mapu) → **Commit changes**. Mape koje počinju s `_` moraju biti tu (`_config.yml`, `_data`, `_includes`, `_layouts`).
+3. **Settings → Pages** → *Branch*: `main` i `/ (root)` → **Save**.
+4. Za 1–2 minute stranica je na `https://KORISNICKO-IME.github.io/web/`.
 
-## 2. Ime, Instagram, e-mail
+## 2. Dodavanje slika (ovo ćeš raditi najčešće)
 
-Otvori `_config.yml` → ikona olovke (**Edit**) → promijeni `naziv`, `opis`, `instagram`, `email` → **Commit changes**.
-**Vodeni žig:** u `_config.yml` promijeni `vodeni_zig` (npr. `"© Ana Horvat"`). Prikazuje se u donjem desnom kutu
-svake slike, ali samo na stranici — datoteke u mapama ostaju bez žiga. Za isključivanje stavi `vodeni_zig: ""`.
+1. Otvori mapu (vidi tablicu gore) → **Add file → Upload files** → povuci slike → **Commit changes**.
+2. Za minutu-dvije slike su na stranici.
 
-**Zaštita slika:** desni klik, povlačenje, dugi pritisak na mobitelu i Ctrl+S su onemogućeni na slikama.
-To odvraća obične posjetitelje, ali screenshot uvijek radi — zato stavljaj smanjene slike (~2000 px), a originale čuvaj kod sebe.
-
-## 3. Dodavanje slika (ovo ćeš raditi najčešće)
-
-Stranica ima dvije galerije, svaka uzima slike iz svoje mape:
-
-| Galerija | Mapa |
-|---|---|
-| **Crno-bijelo** (početna stranica) | `slike-crno-bijelo` |
-| **Boja** | `slike-boja` |
-
-1. Otvori odgovarajuću mapu u repozitoriju.
-2. **Add file → Upload files** → povuci slike → **Commit changes**.
-3. Za minutu-dvije slike su na stranici. Ništa drugo ne treba dirati.
-
-- **Brisanje slike:** klikni na sliku u mapi → `…` gore desno → **Delete file**.
-- **Redoslijed:** slike idu abecedno po imenu datoteke. Ako želiš određeni redoslijed,
-  preimenuj ih npr. `01-trg.jpg`, `02-kisa.jpg`… U `index.html` ili `boja.html` možeš staviti `redoslijed: obrnuto`.
-- **Veličina:** smanji slike prije uploada na ~2000 px po dužoj strani (inače se sporo učitavaju).
-  GitHub prima datoteke do 25 MB kroz preglednik.
+- **Početna i Info** prikazuju samo **prvu** sliku iz svoje mape (po imenu). Za promjenu: obriši staru, ubaci novu.
+  Ako mapu `slika-info` ostaviš praznu, Info stranica je samo tekst.
+- **Brisanje:** klikni na sliku → `…` gore desno → **Delete file**.
+- **Redoslijed u galeriji:** abecedno po imenu datoteke — imenuj ih `01-...jpg`, `02-...jpg`…
+  U `crno-bijelo.md` / `boja.md` možeš staviti `redoslijed: obrnuto`.
+- **Veličina:** JPG, duža stranica ~2000 px, kvaliteta ~82 %, sRGB.
 - Testne slike (`test-…`) obriši kad ubaciš prave.
-- Na mobitelu radi preko aplikacije **GitHub** ili preglednika (verzija za računalo).
 
-## 4. Tekst na stranici "Informacije"
+## 3. Tekstovi
 
-Otvori `informacije.md` → **Edit** → piši. Prazan red = novi odlomak. `**podebljano**`, `## Naslov`.
+- **Početna, Info, Kontakt:** otvori `.md` datoteku (HR u glavnoj mapi, EN u mapi `en`) → olovka **Edit** → piši.
+  Prazan red = novi odlomak · `**podebljano**` · `*kurziv*` · `## Podnaslov` · `- stavka popisa`.
+- **Izbornik** (nazivi stranica, HR i EN): `_data/izbornik.yml`
+- **Sitni natpisi** („fotograf“ / „photographer“, natpisi u formi, poruke): `_data/tekstovi.yml`
+- **Ime, Instagram, e-mail forme, font:** `_config.yml`
 
-## 5. Nova galerija (npr. "Printovi")
+## 4. Font
 
-1. Napravi mapu `slike-printovi` (Add file → Upload files, u polje imena upiši `slike-printovi/` i ubaci slike).
-2. **Add file → Create new file**, ime `printovi.html`, sadržaj:
+Font imena je **Bebas Neue** (Google Fonts, besplatan). Postavlja se u `_config.yml`:
 
-   ```
-   ---
-   layout: default
-   naslov: Printovi
-   mapa: slike-printovi
-   permalink: /printovi/
-   ---
-   <h1 class="naslov-stranice">{{ page.naslov }}</h1>
-   {% include galerija.html mapa=page.mapa %}
-   ```
-3. U `_config.yml` pod `izbornik` dodaj:
-   ```
-     - naslov: "Printovi"
-       link: "/printovi/"
-   ```
+```
+font_naslovi: "Bebas Neue"
+font_link: "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+```
 
-## 6. Spajanje vlastite domene
+Veličina i razmak slova imena: `assets/stil.css`, dio `.logo-ime` (`font-size`, `letter-spacing`).
 
-1. **Settings → Pages → Custom domain** → upiši npr. `mojadomena.com` → **Save**.
-2. Kod registrara domene dodaj DNS zapise:
-   - 4 × **A** zapis za `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - **CNAME** za `www` → `TVOJE-KORISNICKO-IME.github.io`
-3. Kad proradi (do 24 h), uključi **Enforce HTTPS**.
+Za povratak na Helveticu: `font_naslovi: "Helvetica Neue"` i `font_link: ""`.
 
-## 7. Forma za kontakt
+## 5. Spajanje domene (Spaceship)
 
-1. U `_config.yml` upiši svoj e-mail pod `forma_email`.
-2. Kad stranica proradi, sam pošalji probnu poruku preko stranice **Kontakt**.
-3. Na e-mail ti stiže poruka od **FormSubmit** — klikni **Activate Form**. Od tada sve poruke stižu na tvoj mail
-   (provjeri i spam prvi put).
-4. Tekst iznad forme mijenjaš u `kontakt.html` (red `uvod:`).
+1. GitHub: **Settings → Pages → Custom domain** → upiši domenu (bez `www`) → **Save**.
+2. Spaceship → domena → **DNS records**: obriši postojeće zapise za `@` i `www`, pa dodaj:
+   - 4 × **A**, host `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - **CNAME**, host `www` → `KORISNICKO-IME.github.io`
+3. Kad GitHub pokaže zelenu kvačicu, uključi **Enforce HTTPS**.
 
-Savjet: u mailu za aktivaciju FormSubmit ti da i nasumični kod (npr. `a1b2c3...`).
-Ako ga upišeš u `forma_email` umjesto adrese, tvoj e-mail se neće vidjeti u kodu stranice.
+## 6. Forma za kontakt
 
-## 8. Boje i izgled
+Poruke stižu na adresu iz `forma_email` u `_config.yml` preko servisa FormSubmit.
+Prva poruka pokreće aktivaciju: vlasniku stiže mail „Activate Form“ — klikne link **iz najnovijeg** maila, jednom.
 
-Boje, razmak između slika i font su na vrhu datoteke `assets/stil.css` (dio `:root`).
+## 7. Zaštita slika i vodeni žig
+
+Desni klik, povlačenje, dugi pritisak na mobitelu i Ctrl+S su onemogućeni na svim slikama.
+Screenshot uvijek radi — zato na stranicu idu smanjene slike, a originali ostaju kod autora.
+Vodeni žig: `vodeni_zig: "© Vedran Sminderovac"` u `_config.yml` (prazno `""` = bez žiga).
+
+## 8. Boje i razmaci
+
+Na vrhu `assets/stil.css` (dio `:root`): boje, `--razmak` između slika (48px), širina stranice.

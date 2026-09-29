@@ -1,52 +1,73 @@
+{%- assign jezik = page.jezik | default: "hr" -%}
+{%- assign t = site.data.tekstovi[jezik] -%}
+{%- assign izbornik = site.data.izbornik[jezik] -%}
+{%- assign stranice_jezika = site.pages | where: "jezik", jezik -%}
+{%- assign isti_kljuc = site.pages | where: "kljuc", page.kljuc -%}
+{%- assign link_hr = isti_kljuc | where: "jezik", "hr" | first -%}
+{%- assign link_en = isti_kljuc | where: "jezik", "en" | first -%}
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'hr' }}">
+<html lang="{{ jezik }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.naslov and page.url != '/' %}{{ page.naslov }} — {% endif %}{{ site.naziv }}</title>
-  <meta name="description" content="{{ site.naziv }} — {{ site.opis }}">
+  <title>{% if page.naslov and page.kljuc != "pocetna" %}{{ page.naslov }} — {% endif %}{{ site.naziv }} · {{ t.zanimanje }}</title>
+  <meta name="description" content="{{ site.naziv }} — {{ t.zanimanje }}">
   <meta property="og:title" content="{{ site.naziv }}">
-  <meta property="og:description" content="{{ site.opis }}">
+  <meta property="og:description" content="{{ site.naziv }} — {{ t.zanimanje }}">
+  {%- if link_hr %}<link rel="alternate" hreflang="hr" href="{{ link_hr.url | relative_url }}">{% endif %}
+  {%- if link_en %}<link rel="alternate" hreflang="en" href="{{ link_en.url | relative_url }}">{% endif %}
+  {%- if site.font_link != "" %}
+  <link rel="stylesheet" href="{{ site.font_link }}">
+  {%- endif %}
   <link rel="stylesheet" href="{{ '/assets/stil.css' | relative_url }}">
+  <style>:root { --font-naslovi: "{{ site.font_naslovi }}", var(--font); }</style>
 </head>
 <body class="{% if site.crno_bijele_slike %}cb{% endif %}"{% if site.vodeni_zig != "" %} data-zig="{{ site.vodeni_zig | escape }}"{% endif %}>
 
   <header class="zaglavlje">
-    <a class="logo" href="{{ '/' | relative_url }}">{{ site.naziv }}</a>
+    {%- assign pocetna = stranice_jezika | where: "kljuc", "pocetna" | first %}
+    <a class="logo" href="{{ pocetna.url | relative_url }}">
+      <span class="logo-ime">{{ site.naziv }}</span>
+      <span class="logo-zanimanje">{{ t.zanimanje }}</span>
+    </a>
 
-    <button class="izbornik-gumb" aria-label="Izbornik" aria-expanded="false">
+    <button class="izbornik-gumb" aria-label="{{ t.izbornik }}" aria-expanded="false">
       <span></span><span></span>
     </button>
 
     <nav class="izbornik">
-      {% for s in site.izbornik %}
-        {% assign link = s.link | relative_url %}
-        {% assign trenutna = page.url | relative_url %}
-        <a href="{{ link }}"{% if link == trenutna %} class="aktivno" aria-current="page"{% endif %}>{{ s.naslov }}</a>
-      {% endfor %}
-      {% if site.instagram != "" %}
-        <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a>
-      {% endif %}
+      {%- for s in izbornik %}
+        {%- assign cilj = stranice_jezika | where: "kljuc", s.kljuc | first %}
+        {%- if cilj %}
+        <a href="{{ cilj.url | relative_url }}"{% if s.kljuc == page.kljuc %} class="aktivno" aria-current="page"{% endif %}>{{ s.naslov }}</a>
+        {%- endif %}
+      {%- endfor %}
+      <span class="jezici">
+        <a href="{{ link_hr.url | default: '/' | relative_url }}" lang="hr" hreflang="hr" title="Hrvatski" class="{% if jezik == 'hr' %}aktivan{% endif %}">{% include zastava-hr.svg %}<span class="sr">Hrvatski</span></a>
+        <a href="{{ link_en.url | default: '/en/' | relative_url }}" lang="en" hreflang="en" title="English" class="{% if jezik == 'en' %}aktivan{% endif %}">{% include zastava-en.svg %}<span class="sr">English</span></a>
+      </span>
     </nav>
   </header>
 
-  <main>
+  <main class="stranica-{{ page.kljuc }}">
     {{ content }}
   </main>
 
   <footer class="podnozje">
     <div>
-      <h4>Stranice</h4>
-      {% for s in site.izbornik %}<a href="{{ s.link | relative_url }}">{{ s.naslov }}</a>{% endfor %}
+      <h4>{{ t.stranice }}</h4>
+      {%- for s in izbornik %}
+        {%- assign cilj = stranice_jezika | where: "kljuc", s.kljuc | first %}
+        {%- if cilj %}<a href="{{ cilj.url | relative_url }}">{{ s.naslov }}</a>{% endif %}
+      {%- endfor %}
     </div>
     <div>
-      <h4>Prati</h4>
+      <h4>{{ t.prati }}</h4>
       {% if site.instagram != "" %}<a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
-      {% if site.email != "" %}<a href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}
     </div>
     <div class="potpis">
-      <p>{{ site.naziv }}</p>
-      <p>{{ site.opis }}</p>
+      <p class="potpis-ime">{{ site.naziv }}</p>
+      <p>{{ t.zanimanje }}</p>
       <p>© {{ site.time | date: '%Y' }}</p>
     </div>
   </footer>

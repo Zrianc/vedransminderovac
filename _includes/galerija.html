@@ -25,5 +25,6 @@
 </div>
 
 {%- if broj == 0 -%}
-  <p class="prazno">Ovdje još nema slika. Dodaj ih u mapu <code>{{ mapa }}</code> na GitHubu.</p>
+  {%- assign jezik = page.jezik | default: "hr" -%}
+  <p class="prazno">{{ site.data.tekstovi[jezik].prazno }}</p>
 {%- endif -%}

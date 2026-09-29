@@ -1,0 +1,6 @@
+---
+layout: default
+---
+{%- comment -%} Stranica samo s fotografijama. Mapa se zadaje u stranici (crno-bijelo.md, boja.md, en/...). {%- endcomment -%}
+<h1 class="sr">{{ page.naslov }}</h1>
+{% include galerija.html mapa=page.mapa redoslijed=page.redoslijed %}

@@ -1,0 +1,11 @@
+---
+layout: default
+---
+{%- comment -%} Početna: jedna veća fotografija (mapa slika-naslovna) + kratki tekst iz index.md / en/index.md {%- endcomment -%}
+<section class="pocetna">
+  {% include prva-slika.html mapa="slika-naslovna" klasa="pocetna-slika" %}
+  <div class="pocetna-tekst">
+    <h1 class="sr">{{ site.naziv }}</h1>
+    {{ content }}
+  </div>
+</section>

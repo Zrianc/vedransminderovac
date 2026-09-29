@@ -44,14 +44,44 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   white-space: nowrap;
 }
+.logo-ime {
+  font-family: var(--font-naslovi, var(--font));
+  font-size: 32px;
+  font-weight: 700;            /* Bebas Neue ima samo jednu težinu */
+  font-synthesis: none;        /* bez umjetnog podebljavanja */
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.logo-zanimanje {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blijedo);
+}
 
-.izbornik { display: flex; gap: 28px; }
+.izbornik { display: flex; align-items: center; gap: 28px; }
+
+/* Zastavice HR / EN */
+.jezici { display: flex; align-items: center; gap: 10px; margin-left: 8px; }
+.izbornik .jezici a { border: 0; padding: 0; line-height: 0; opacity: .4; transition: opacity .2s; }
+.izbornik .jezici a:hover,
+.izbornik .jezici a.aktivan { opacity: 1; }
+.zastava { display: block; width: 22px; height: 15px; }
+
+/* Tekst samo za čitače ekrana */
+.sr {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 
 .izbornik a {
   font-size: 13px;
@@ -173,7 +203,13 @@ body.cb .lightbox img { filter: grayscale(1); }
 .podnozje a:hover { color: var(--tekst); }
 .potpis { text-align: right; }
 .potpis p { margin: 0 0 4px; }
-.potpis p:first-child { font-weight: 700; }
+.potpis .potpis-ime {
+  font-family: var(--font-naslovi, var(--font));
+  font-size: 18px;
+  font-weight: 700;
+  font-synthesis: none;
+  letter-spacing: 0.1em;
+}
 
 /* ---------- Povećana slika (lightbox) ---------- */
 .lightbox {
@@ -220,16 +256,7 @@ body.cb .lightbox img { filter: grayscale(1); }
 }
 
 /* ---------- Mobitel i tablet ---------- */
-@media (max-width: 1000px) {
-  .galerija { columns: 2; }
-  :root { --razmak: 32px; }
-}
-
-@media (max-width: 700px) {
-  .zaglavlje { padding: 20px 16px; }
-  main { padding: 8px 16px 60px; }
-  .logo { font-size: 17px; }
-
+@media (max-width: 960px) {
   .izbornik-gumb { display: block; }
   .izbornik {
     position: fixed;
@@ -246,6 +273,20 @@ body.cb .lightbox img { filter: grayscale(1); }
   }
   .izbornik a { font-size: 18px; }
   .izbornik-otvoren .izbornik { opacity: 1; visibility: visible; }
+  .jezici { margin: 12px 0 0; gap: 20px; }
+  .zastava { width: 30px; height: 20px; }
+}
+
+@media (max-width: 1000px) {
+  .galerija { columns: 2; }
+  :root { --razmak: 32px; }
+}
+
+@media (max-width: 700px) {
+  .zaglavlje { padding: 20px 16px; }
+  main { padding: 8px 16px 60px; }
+  .logo-ime { font-size: 26px; }
+  .logo-zanimanje { font-size: 10px; }
 
   .galerija { columns: 1; }
   :root { --razmak: 28px; }
@@ -354,4 +395,70 @@ body.cb .lightbox img { filter: grayscale(1); }
   padding: 18px 20px;
   font-size: 13px;
   line-height: 1;
+}
+
+/* ---------- Zaštićene pojedinačne slike (početna, info) ---------- */
+.zasticeno {
+  position: relative;
+  margin: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.zasticeno img { width: 100%; pointer-events: none; -webkit-user-drag: none; }
+.zasticeno::after { content: ""; position: absolute; inset: 0; }
+.zasticeno[data-zig]::after {
+  content: attr(data-zig);
+  display: flex; align-items: flex-end; justify-content: flex-end;
+  padding: 14px 16px;
+  color: rgba(255,255,255,.75);
+  font: 600 11px/1 var(--font); letter-spacing: .16em; text-transform: uppercase;
+  text-shadow: 0 0 3px rgba(0,0,0,.45);
+}
+body.cb .zasticeno img { filter: grayscale(1); }
+
+/* ---------- Početna ---------- */
+.pocetna {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 64px;
+  align-items: center;
+  min-height: calc(100vh - 220px);
+}
+.pocetna-slika img { max-height: calc(100vh - 200px); width: 100%; object-fit: cover; }
+.pocetna-tekst { max-width: 460px; font-size: 17px; line-height: 1.7; }
+.pocetna-tekst p { margin: 0 0 1.1em; }
+.pocetna:not(:has(figure)) { grid-template-columns: 1fr; }
+
+/* ---------- Info ---------- */
+.info {
+  display: grid;
+  grid-template-columns: minmax(0, 640px) minmax(0, 420px);
+  gap: 80px;
+  align-items: start;
+}
+.info .tekst { max-width: none; }
+.info-slika { position: sticky; top: 120px; }
+.info:not(:has(figure)) { grid-template-columns: minmax(0, 640px); }
+.tekst ul { margin: 0 0 1em; padding-left: 1.1em; }
+.tekst li { margin-bottom: 4px; }
+
+/* ---------- Instagram na kontaktu ---------- */
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--crta);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.instagram-link:hover { opacity: .6; }
+
+@media (max-width: 900px) {
+  .pocetna, .info { grid-template-columns: 1fr; gap: 36px; min-height: 0; }
+  .pocetna-slika img { max-height: none; }
+  .info-slika { position: static; max-width: 420px; order: -1; }
 }

@@ -1,0 +1,45 @@
+---
+layout: default
+---
+{%- assign jezik = page.jezik | default: "hr" -%}
+{%- assign t = site.data.tekstovi[jezik] -%}
+<section class="kontakt">
+  <h1 class="naslov-stranice">{{ page.naslov }}</h1>
+  <div class="kontakt-uvod">{{ content }}</div>
+
+  <form class="forma" action="https://formsubmit.co/{{ site.forma_email }}" method="POST"
+        data-ajax="https://formsubmit.co/ajax/{{ site.forma_email }}"
+        data-saljem="{{ t.forma_saljem }}" data-gumb="{{ t.forma_gumb }}"
+        data-ok="{{ t.forma_ok }}" data-aktivacija="{{ t.forma_aktivacija }}"
+        data-greska="{{ t.forma_greska }}" data-mreza="{{ t.forma_mreza }}"
+        data-lokalno="{{ t.forma_lokalno }}">
+    <label>
+      <span>{{ t.forma_ime }}</span>
+      <input type="text" name="Ime" required autocomplete="name">
+    </label>
+    <label>
+      <span>{{ t.forma_email }}</span>
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label>
+      <span>{{ t.forma_poruka }}</span>
+      <textarea name="Poruka" rows="7" required></textarea>
+    </label>
+
+    <!-- Postavke servisa FormSubmit (ne mijenjati) -->
+    <input type="hidden" name="_subject" value="{{ t.forma_naslov_maila }} {{ site.naziv }}">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" class="skriveno" tabindex="-1" autocomplete="off">
+
+    <button type="submit">{{ t.forma_gumb }}</button>
+    <p class="forma-status" role="status" aria-live="polite"></p>
+  </form>
+
+  {% if site.instagram != "" %}
+  <a class="instagram-link" href="{{ site.instagram }}" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>
+    <span>@{{ site.instagram | split: "instagram.com/" | last | remove: "/" }}</span>
+  </a>
+  {% endif %}
+</section>
+<script src="{{ '/assets/kontakt.js' | relative_url }}" defer></script>

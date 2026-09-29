@@ -1,46 +1,34 @@
 # ==========================================================
-#  POSTAVKE STRANICE — ovdje mijenjaš ime, opis i linkove
+#  POSTAVKE STRANICE
 # ==========================================================
+#  Tekstovi izbornika i natpisi na oba jezika: _data/izbornik.yml i _data/tekstovi.yml
+#  Tekst na stranicama: index.md, info.md, kontakt.md  (engleski: mapa en/)
 
 # Ime koje piše gore lijevo i u naslovu kartice preglednika
 naziv: "Vedran Sminderovac"
 
-# Kratki opis (prikazuje se u podnožju i na Googleu)
-opis: "umjetnička fotografija"
-
 # Instagram (ostavi prazno "" ako ga ne želiš prikazati)
 instagram: "https://www.instagram.com/vedran.sminderovac/"
 
-# E-mail za kontakt (ostavi prazno "" ako ga ne želiš prikazati)
-email: ""
-
-# E-mail na koji stižu poruke iz forme za kontakt (stranica Kontakt).
-# Prvi put kad netko pošalje poruku, na ovu adresu stiže mail za aktivaciju — klikni "Activate".
+# E-mail na koji stižu poruke iz forme za kontakt.
+# Prvi put stiže mail za aktivaciju od FormSubmita — klikni "Activate Form".
 forma_email: "vedran.sminderovac@gmail.com"
 
-# Izbornik — redoslijed ovdje je redoslijed na stranici.
-# Za novu galeriju: kopiraj boja.html, promijeni naslov i mapu, dodaj red ovdje.
-izbornik:
-  - naslov: "Crno-bijelo"
-    link: "/"
-  - naslov: "Boja"
-    link: "/boja/"
-  - naslov: "Informacije"
-    link: "/informacije/"
-  - naslov: "Kontakt"
-    link: "/kontakt/"
+# Font za ime i naslove. Mijenja se ovdje — vidi UPUTE.md (dio "Font").
+#   font_naslovi: ime fonta kako ga zove CSS
+#   font_link: link na font (Fontshare ili Google Fonts); prazno "" ako nije potreban
+font_naslovi: "Bebas Neue"
+font_link: "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+
+# Vodeni žig preko slika (samo na prikazu). Prazno "" = bez žiga.
+vodeni_zig: ""
 
 # true = sve slike se prikazuju crno-bijelo (čak i ako su u boji)
 crno_bijele_slike: false
 
-# Vodeni žig preko slika (samo na prikazu — originalne datoteke ostaju netaknute).
-# Ostavi prazno "" ako ga ne želiš.
-vodeni_zig: ""
-
 # ----------------------------------------------------------
 #  Tehničke postavke — ne treba mijenjati
 # ----------------------------------------------------------
-lang: hr
 permalink: pretty
 exclude:
   - README.md

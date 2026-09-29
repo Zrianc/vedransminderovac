@@ -1,0 +1,23 @@
+# Izbornik na oba jezika. "kljuc" povezuje istu stranicu na HR i EN (za zastavice).
+hr:
+  - naslov: "Početna"
+    kljuc: pocetna
+  - naslov: "Crno-bijelo"
+    kljuc: crno-bijelo
+  - naslov: "Boja"
+    kljuc: boja
+  - naslov: "Info"
+    kljuc: info
+  - naslov: "Kontakt"
+    kljuc: kontakt
+en:
+  - naslov: "Home"
+    kljuc: pocetna
+  - naslov: "Black & White"
+    kljuc: crno-bijelo
+  - naslov: "Colour"
+    kljuc: boja
+  - naslov: "Info"
+    kljuc: info
+  - naslov: "Contact"
+    kljuc: kontakt
