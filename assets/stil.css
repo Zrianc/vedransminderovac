@@ -72,7 +72,7 @@ img { display: block; max-width: 100%; height: auto; }
 .izbornik .jezici a { border: 0; padding: 0; line-height: 0; opacity: .4; transition: opacity .2s; }
 .izbornik .jezici a:hover,
 .izbornik .jezici a.aktivan { opacity: 1; }
-.zastava { display: block; width: 22px; height: 15px; }
+.zastava { display: block; width: 30px; height: 15px; }
 
 /* Tekst samo za čitače ekrana */
 .sr {
@@ -275,7 +275,7 @@ body.cb .lightbox img { filter: grayscale(1); }
   .izbornik a { font-size: 18px; }
   .izbornik-otvoren .izbornik { opacity: 1; visibility: visible; }
   .jezici { margin: 12px 0 0; gap: 20px; }
-  .zastava { width: 30px; height: 20px; }
+  .zastava { width: 40px; height: 20px; }
 }
 
 @media (max-width: 1000px) {

@@ -43,8 +43,8 @@
         {%- endif %}
       {%- endfor %}
       <span class="jezici">
-        <a href="{{ link_hr.url | default: '/' | relative_url }}" lang="hr" hreflang="hr" title="Hrvatski" class="{% if jezik == 'hr' %}aktivan{% endif %}">{% include zastava-hr.svg %}<span class="sr">Hrvatski</span></a>
-        <a href="{{ link_en.url | default: '/en/' | relative_url }}" lang="en" hreflang="en" title="English" class="{% if jezik == 'en' %}aktivan{% endif %}">{% include zastava-en.svg %}<span class="sr">English</span></a>
+        <a href="{{ link_hr.url | default: '/' | relative_url }}" lang="hr" hreflang="hr" title="Hrvatski" class="{% if jezik == 'hr' %}aktivan{% endif %}"><img class="zastava" src="{{ '/assets/zastava-hr.svg' | relative_url }}" alt="" width="30" height="15"><span class="sr">Hrvatski</span></a>
+        <a href="{{ link_en.url | default: '/en/' | relative_url }}" lang="en" hreflang="en" title="English" class="{% if jezik == 'en' %}aktivan{% endif %}"><img class="zastava" src="{{ '/assets/zastava-en.svg' | relative_url }}" alt="" width="30" height="15"><span class="sr">English</span></a>
       </span>
     </nav>
   </header>
