@@ -8,9 +8,11 @@
   });
   if (!popis.length) return;
 
-  var sekunde = parseFloat(mz.dataset.sekunde) || 8;
-  var fade = parseFloat(mz.dataset.fade) || 2.5;
+  var sekunde = parseFloat(mz.dataset.sekunde) || 5;
+  var fade = parseFloat(mz.dataset.fade) || 2.5;      // nestajanje stare
+  var pojava = parseFloat(mz.dataset.pojava) || 4;    // pojavljivanje nove
   mz.style.setProperty('--fade', fade + 's');
+  mz.style.setProperty('--pojava', pojava + 's');
   var k = Math.min(parseInt(mz.dataset.naEkranu, 10) || 10, popis.length);
 
   // Pločice
@@ -80,10 +82,12 @@
       prikazano[t] = nova;
       red.push(stara);
       p.setAttribute('aria-label', popis[nova].alt);
-      // nova se počne pojavljivati dok stara još nestaje — meko pretapanje
+      // nova se počne pojavljivati kad je stara već napola nestala
       p.appendChild(im);
-      setTimeout(function () { im.classList.add('vidljiva'); }, fade * 500);
-      setTimeout(function () { if (staraSlika) staraSlika.remove(); }, fade * 1000 + 200);
+      setTimeout(function () {
+        requestAnimationFrame(function () { im.classList.add('vidljiva'); });
+      }, fade * 600);
+      setTimeout(function () { if (staraSlika) staraSlika.remove(); }, fade * 1000 + 300);
     }
     if (im.complete) pokazi(); else { im.onload = pokazi; im.onerror = function () { red.push(nova); }; }
   }

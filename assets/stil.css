@@ -492,11 +492,16 @@ body.cb .zasticeno img { filter: grayscale(1); }
   object-fit: contain;          /* cijela slika, bez rezanja — svaka u svom formatu */
   object-position: var(--poz, center);
   opacity: 0;
-  transition: opacity var(--fade, 2.5s) ease-in-out, transform .6s ease;
+  /* nestajanje (kad se makne klasa .vidljiva) */
+  transition: opacity var(--fade, 2.5s) cubic-bezier(.45, 0, .55, 1), transform .6s ease;
   pointer-events: none;
   -webkit-user-drag: none;
 }
-.mz-plocica img.vidljiva { opacity: 1; }
+.mz-plocica img.vidljiva {
+  opacity: 1;
+  /* pojavljivanje: sporo i mekano, sporije od nestajanja */
+  transition: opacity var(--pojava, 4s) cubic-bezier(.45, 0, .55, 1), transform .6s ease;
+}
 .mz-plocica:hover img.vidljiva { transform: scale(1.02); }
 .mz-plocica:focus-visible { outline: 1px solid var(--tekst); outline-offset: 4px; }
 body.cb .mz-plocica img { filter: grayscale(1); }
