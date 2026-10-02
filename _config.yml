@@ -40,8 +40,8 @@ font_link: "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
 galerija_nacin: "mozaik"
 mozaik_broj: 10        # koliko slika je odjednom na ekranu
 mozaik_sekunde: 5      # svakih koliko sekundi se jedna slika zamijeni
-mozaik_fade: 2.5       # koliko sekundi stara slika nestaje (fade out)
-mozaik_pojava: 4       # koliko sekundi se nova slika pojavljuje (fade in)
+mozaik_fade: 1.5       # koliko sekundi stara slika nestaje (fade out)
+mozaik_pojava: 2.5     # koliko sekundi se nova slika pojavljuje (fade in)
 
 # Vodeni žig preko slika (samo na prikazu). Prazno "" = bez žiga.
 vodeni_zig: ""

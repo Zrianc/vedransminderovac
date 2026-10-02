@@ -9,7 +9,7 @@
 {%- assign seo_en = isti_kljuc | where: "jezik", "en" | first -%}
 
 {%- if page.kljuc == "pocetna" or page.naslov == nil -%}
-  {%- assign seo_naslov = site.naziv | append: " · " | append: t.zanimanje | append: ", Zagreb" -%}
+  {%- assign seo_naslov = site.naziv | append: " · " | append: t.zanimanje -%}
 {%- else -%}
   {%- assign seo_naslov = page.naslov | append: " — " | append: site.naziv | append: " · " | append: t.zanimanje -%}
 {%- endif -%}

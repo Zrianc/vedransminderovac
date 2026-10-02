@@ -10,5 +10,5 @@ permalink: /
 
 <p class="pozdrav-uvod">I am</p>
 <p class="pozdrav-ime">Vedran Sminderovac</p>
-<p class="pozdrav-opis">photographer focused on street life.</p>
+<p class="pozdrav-opis">street life photographer.</p>
 <p class="pozdrav-kraj">Welcome!</p>

@@ -10,5 +10,5 @@ permalink: /hr/
 
 <p class="pozdrav-uvod">Ja sam</p>
 <p class="pozdrav-ime">Vedran Sminderovac</p>
-<p class="pozdrav-opis">fotograf fokusiran na život na ulici.</p>
+<p class="pozdrav-opis">fotograf uličnog života.</p>
 <p class="pozdrav-kraj">Dobrodošli!</p>

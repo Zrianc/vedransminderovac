@@ -55,8 +55,8 @@ a slika koja izađe ide na kraj reda. Zato je dobro da u mapi bude više slika n
 Postavke u `_config.yml`:
 - `mozaik_broj: 10` — koliko slika je odjednom na ekranu
 - `mozaik_sekunde: 5` — svakih koliko sekundi se jedna slika zamijeni (veće = sporije)
-- `mozaik_fade: 2.5` — koliko sekundi stara slika nestaje
-- `mozaik_pojava: 4` — koliko sekundi se nova slika pojavljuje
+- `mozaik_fade: 1.5` — koliko sekundi stara slika nestaje
+- `mozaik_pojava: 2.5` — koliko sekundi se nova slika pojavljuje
 - `galerija_nacin: "mreza"` — vraća klasičnu galeriju (sve slike, scroll)
 
 ## 3. Tekstovi
