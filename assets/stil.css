@@ -551,5 +551,5 @@ body.cb .mz-plocica img { filter: grayscale(1); }
 }
 
 /* Instagram u podnožju: ikona + @ime */
-.podnozje .ig { display: inline-flex; align-items: center; gap: 8px; text-transform: none; letter-spacing: .04em; }
+.podnozje .ig { margin-top: 26px; display: inline-flex; align-items: center; gap: 8px; text-transform: none; letter-spacing: .04em; }
 .podnozje .ig svg { flex: none; }
