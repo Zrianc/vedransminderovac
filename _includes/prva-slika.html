@@ -17,6 +17,9 @@
 {%- endfor -%}
 {%- if nadjena -%}
 <figure class="{{ include.klasa }} zasticeno"{% if site.vodeni_zig != "" %} data-zig="{{ site.vodeni_zig | escape }}"{% endif %}>
-  <img src="{{ nadjena.path | relative_url }}" alt="{{ site.naziv }}" draggable="false">
+  <img src="{{ nadjena.path | relative_url }}" alt="{{ site.naziv }}{% if include.potpis %} — {{ include.potpis }}{% endif %}" draggable="false">
+  {%- if include.potpis and include.potpis != "" %}
+  <figcaption class="foto-potpis">{{ include.potpis }}</figcaption>
+  {%- endif %}
 </figure>
 {%- endif -%}

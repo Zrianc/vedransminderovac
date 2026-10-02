@@ -50,15 +50,27 @@
     return im;
   }
 
-  // Raspored: vodoravni ekran = 2 reda, uspravni (mobitel) = 2 stupca
+  // Raspored: izračunaj broj stupaca tako da (većinom položene) fotke budu što veće
+  var omjer = 1.5;                      // tipičan omjer fotke (širina / visina)
   function raspored() {
-    var vodoravno = window.innerWidth >= window.innerHeight * 0.9;
-    var stupci = vodoravno ? Math.ceil(k / 2) : 2;
-    var redovi = Math.ceil(k / stupci);
-    mreza.style.setProperty('--stupci', stupci);
-    mreza.style.setProperty('--redovi', redovi);
     var vrh = mz.getBoundingClientRect().top + window.scrollY;
-    mz.style.height = Math.max(320, window.innerHeight - vrh - 28) + 'px';
+    var H = Math.max(320, window.innerHeight - vrh - 28);
+    var W = mz.clientWidth;
+    var gap = window.innerWidth < 700 ? 12 : 28;
+    var najbolje = null;
+    for (var c = 1; c <= k; c++) {
+      var r = Math.ceil(k / c);
+      var w = (W - gap * (c - 1)) / c, h = (H - gap * (r - 1)) / r;
+      if (w <= 0 || h <= 0) continue;
+      var fw = Math.min(w, h * omjer), fh = fw / omjer;      // položena fotka u ćeliji
+      var vw = Math.min(h / omjer, w), vh = vw * omjer;      // uspravna fotka u ćeliji
+      var ocjena = fw * fh * 0.8 + vw * vh * 0.2;
+      if (!najbolje || ocjena > najbolje.ocjena) najbolje = { c: c, r: r, w: w, h: h, ocjena: ocjena };
+    }
+    mz.style.height = H + 'px';
+    mreza.style.setProperty('--gap', gap + 'px');
+    mreza.style.setProperty('--sirina-p', Math.floor(najbolje.w) + 'px');
+    mreza.style.setProperty('--visina-p', Math.floor(najbolje.h) + 'px');
   }
   raspored();
   window.addEventListener('resize', raspored);

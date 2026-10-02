@@ -18,7 +18,7 @@
       {%- if pocetak == prefiks -%}
         {%- if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" or ext == ".avif" -%}
           {%- assign broj = broj | plus: 1 -%}
-          {%- assign ime = f.basename | replace: '_', '-' -%}{%- assign p2 = ime | slice: 0, 2 | plus: 0 -%}{%- assign z3 = ime | slice: 2, 1 -%}{%- if p2 > 0 and z3 == "-" -%}{%- assign ime = ime | slice: 3, 200 -%}{%- endif -%}{%- assign alt = ime | replace: '-', ' ' | append: " — " | append: site.naziv -%}
+          {%- assign ime = f.basename | replace: '_', '-' -%}{%- assign p2 = ime | slice: 0, 2 | plus: 0 -%}{%- assign z3 = ime | slice: 2, 1 -%}{%- if p2 > 0 and z3 == "-" -%}{%- assign ime = ime | slice: 3, 200 -%}{%- endif -%}{%- assign samo_broj = ime | size -%}{%- if samo_broj <= 3 -%}{%- assign alt = site.naziv | append: " — " | append: site.data.tekstovi[page.jezik].zanimanje -%}{%- else -%}{%- assign alt = ime | replace: '-', ' ' | append: " — " | append: site.naziv -%}{%- endif -%}
     <li data-src="{{ f.path | relative_url }}" data-alt="{{ alt | escape }}"></li>
         {%- endif -%}
       {%- endif -%}
@@ -31,7 +31,7 @@
         {%- assign pocetak = f.path | slice: 0, duljina -%}
         {%- assign ext = f.extname | downcase -%}
         {%- if pocetak == prefiks -%}{%- if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" or ext == ".avif" -%}
-        {%- assign ime = f.basename | replace: '_', '-' -%}{%- assign p2 = ime | slice: 0, 2 | plus: 0 -%}{%- assign z3 = ime | slice: 2, 1 -%}{%- if p2 > 0 and z3 == "-" -%}{%- assign ime = ime | slice: 3, 200 -%}{%- endif -%}{%- assign alt = ime | replace: '-', ' ' | append: " — " | append: site.naziv -%}
+        {%- assign ime = f.basename | replace: '_', '-' -%}{%- assign p2 = ime | slice: 0, 2 | plus: 0 -%}{%- assign z3 = ime | slice: 2, 1 -%}{%- if p2 > 0 and z3 == "-" -%}{%- assign ime = ime | slice: 3, 200 -%}{%- endif -%}{%- assign samo_broj = ime | size -%}{%- if samo_broj <= 3 -%}{%- assign alt = site.naziv | append: " — " | append: site.data.tekstovi[page.jezik].zanimanje -%}{%- else -%}{%- assign alt = ime | replace: '-', ' ' | append: " — " | append: site.naziv -%}{%- endif -%}
       <div class="slika"><img src="{{ f.path | relative_url }}" alt="{{ alt | escape }}" loading="lazy"></div>
         {%- endif -%}{%- endif -%}
       {%- endfor %}

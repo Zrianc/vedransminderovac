@@ -45,10 +45,12 @@ img { display: block; max-width: 100%; height: auto; }
 
 .logo {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: 14px;
   white-space: nowrap;
 }
+.logo-znak { display: block; width: 44px; height: 44px; flex: none; }
+.logo-tekst { display: flex; flex-direction: column; gap: 4px; }
 .logo-ime {
   font-family: var(--font-naslovi, var(--font));
   font-size: 32px;
@@ -286,7 +288,9 @@ body.cb .lightbox img { filter: grayscale(1); }
 @media (max-width: 700px) {
   .zaglavlje { padding: 20px 16px; }
   main { padding: 8px 16px 60px; }
-  .logo-ime { font-size: 26px; }
+  .logo-ime { font-size: 22px; }
+  .logo-znak { width: 36px; height: 36px; }
+  .logo { gap: 10px; }
   .logo-zanimanje { font-size: 10px; }
 
   .galerija { columns: 1; }
@@ -408,6 +412,7 @@ body.cb .lightbox img { filter: grayscale(1); }
 }
 .zasticeno img { width: 100%; pointer-events: none; -webkit-user-drag: none; }
 .zasticeno::after { content: ""; position: absolute; inset: 0; }
+.zasticeno:has(figcaption)::after { bottom: 34px; }
 .zasticeno[data-zig]::after {
   content: attr(data-zig);
   display: flex; align-items: flex-end; justify-content: flex-end;
@@ -468,14 +473,18 @@ body.cb .zasticeno img { filter: grayscale(1); }
 .stranica-crno-bijelo, .stranica-boja { padding-bottom: 28px; }
 .mozaik { position: relative; }
 .mz-mreza {
-  display: grid;
-  grid-template-columns: repeat(var(--stupci, 5), minmax(0, 1fr));
-  grid-template-rows: repeat(var(--redovi, 2), minmax(0, 1fr));
-  gap: 28px 36px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: var(--gap, 28px);
   height: 100%;
 }
 .mz-plocica {
   position: relative;
+  flex: none;
+  width: var(--sirina-p, 240px);
+  height: var(--visina-p, 240px);
   padding: 0;
   border: 0;
   background: none;
@@ -506,9 +515,7 @@ body.cb .zasticeno img { filter: grayscale(1); }
 .mz-plocica:focus-visible { outline: 1px solid var(--tekst); outline-offset: 4px; }
 body.cb .mz-plocica img { filter: grayscale(1); }
 
-@media (max-width: 700px) {
-  .mz-mreza { gap: 14px; }
-}
+
 @media (prefers-reduced-motion: reduce) {
   .mz-plocica img { transition: none; }
 }
@@ -516,3 +523,28 @@ body.cb .mz-plocica img { filter: grayscale(1); }
 /* ---------- 404 ---------- */
 .stranica-404 { min-height: 50vh; }
 .stranica-404 a { border-bottom: 1px solid currentColor; }
+
+/* ---------- Pozdrav na početnoj ---------- */
+.pocetna-tekst p { margin: 0; }
+.pozdrav-uvod { font-size: 18px; color: var(--blijedo); letter-spacing: .04em; }
+.pozdrav-ime {
+  margin: 6px 0 10px !important;
+  font-family: var(--font-naslovi, var(--font));
+  font-size: clamp(44px, 6vw, 84px);
+  font-weight: 700;
+  font-synthesis: none;
+  line-height: .95;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.pozdrav-opis { font-size: 19px; line-height: 1.5; }
+.pozdrav-kraj { margin-top: 28px !important; font-size: 13px; letter-spacing: .3em; text-transform: uppercase; }
+
+/* Potpis ispod fotografije (npr. autor portreta) */
+.foto-potpis {
+  margin-top: 10px;
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--blijedo);
+}
+.zasticeno .foto-potpis { position: relative; z-index: 1; }

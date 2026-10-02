@@ -18,10 +18,11 @@ permalink: /sitemap.xml
     <priority>{% if p.kljuc == "pocetna" %}1.0{% elsif p.mapa %}0.9{% else %}0.7{% endif %}</priority>
     {%- if p_hr %}
     <xhtml:link rel="alternate" hreflang="hr" href="{{ p_hr.url | absolute_url }}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="{{ p_hr.url | absolute_url }}"/>
+    
     {%- endif %}
     {%- if p_en %}
     <xhtml:link rel="alternate" hreflang="en" href="{{ p_en.url | absolute_url }}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ p_en.url | absolute_url }}"/>
     {%- endif %}
     {%- if p.mapa %}{% assign mapa = p.mapa %}{% elsif p.kljuc == "pocetna" %}{% assign mapa = "slika-naslovna" %}{% elsif p.kljuc == "info" %}{% assign mapa = "slika-info" %}{% else %}{% assign mapa = "" %}{% endif %}
     {%- if mapa != "" %}

@@ -1,15 +1,14 @@
 ---
 # Opis stranice za Google (1–2 rečenice, do ~160 znakova):
-opis: "Vedran Sminderovac, fotograf iz Zagreba. Ulična fotografija u crno-bijeloj tehnici i u boji — geometrija grada i neponovljivi trenuci svakodnevice."
+opis: "Vedran Sminderovac, photographer from Zagreb, Croatia, focused on street life — street photography in black and white and colour."
 layout: pocetna
-jezik: hr
+jezik: en
 kljuc: pocetna
-naslov: Početna
+naslov: Home
 permalink: /
 ---
 
-Vedran Sminderovac fotograf je iz Zagreba. Bavi se uličnom fotografijom —
-traži neobične, neponovljive trenutke svakodnevice i red koji grad skriva u svojoj geometriji.
-
-Snima u crno-bijeloj tehnici i u boji. Radovi su mu izlagani u Zagrebu i Splitu,
-a nagrađivani na domaćim i međunarodnim salonima fotografije.
+<p class="pozdrav-uvod">I am</p>
+<p class="pozdrav-ime">Vedran Sminderovac</p>
+<p class="pozdrav-opis">photographer focused on street life.</p>
+<p class="pozdrav-kraj">Welcome!</p>

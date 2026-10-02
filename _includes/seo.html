@@ -45,10 +45,11 @@
   <link rel="canonical" href="{{ seo_url }}">
   {%- if seo_hr %}
   <link rel="alternate" hreflang="hr" href="{{ seo_hr.url | absolute_url }}">
-  <link rel="alternate" hreflang="x-default" href="{{ seo_hr.url | absolute_url }}">
+  
   {%- endif %}
   {%- if seo_en %}
   <link rel="alternate" hreflang="en" href="{{ seo_en.url | absolute_url }}">
+  <link rel="alternate" hreflang="x-default" href="{{ seo_en.url | absolute_url }}">
   {%- endif %}
 
   <!-- Pregled kad se link dijeli (Facebook, WhatsApp, Viber, LinkedIn, X…) -->

@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>{{ site.naziv }}</title>
+<link rel="canonical" href="{{ page.na | absolute_url }}">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ page.na | relative_url }}">
+<script>location.replace("{{ page.na | relative_url }}")</script></head>
+<body><a href="{{ page.na | relative_url }}">{{ page.na | absolute_url }}</a></body></html>

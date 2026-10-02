@@ -2,13 +2,19 @@
 
 ## Što je gdje
 
-| Stranica | HR adresa | EN adresa | Tekst se mijenja u | Slike idu u mapu |
+| Stranica | EN adresa (glavna) | HR adresa | Tekst se mijenja u | Slike idu u mapu |
 |---|---|---|---|---|
-| Početna | `/` | `/en/` | `index.md` · `en/index.md` | `slika-naslovna` (1 slika) |
-| Crno-bijelo | `/crno-bijelo/` | `/en/black-and-white/` | — | `slike-crno-bijelo` |
-| Boja | `/boja/` | `/en/colour/` | — | `slike-boja` |
-| Info | `/info/` | `/en/info/` | `info.md` · `en/info.md` | `slika-info` (1 slika, nije obavezna) |
-| Kontakt | `/kontakt/` | `/en/contact/` | `kontakt.md` · `en/contact.md` | — |
+| Početna / Home | `/` | `/hr/` | `index.md` · `hr/index.md` | `slika-naslovna` (1 slika) |
+| Black & White / Crno-bijelo | `/black-and-white/` | `/hr/crno-bijelo/` | — | `slike-crno-bijelo` |
+| Colour / Boja | `/colour/` | `/hr/boja/` | — | `slike-boja` |
+| Info | `/info/` | `/hr/info/` | `info.md` · `hr/info.md` | `slika-info` (1 slika, nije obavezna) |
+| Contact / Kontakt | `/contact/` | `/hr/kontakt/` | `contact.md` · `hr/kontakt.md` | — |
+
+Stranica se **uvijek prvo otvara na engleskom**; zastavicom se prebacuje na hrvatski.
+Mapa `stare-adrese` samo preusmjerava stare linkove (`/en/...`, `/boja/`…) na nove — ne treba je dirati.
+
+**Logo** (`assets/logo.svg`) je gore lijevo i u kartici preglednika (favicon). Za promjenu zamijeni `logo.svg`,
+a za favicon i `favicon.ico`, `assets/ikona.svg`, `assets/apple-touch-icon.png`, `assets/ikona-192.png`, `assets/ikona-512.png`.
 
 Obje jezične verzije koriste **iste slike** — ubaciš ih jednom.
 
@@ -28,8 +34,8 @@ Obje jezične verzije koriste **iste slike** — ubaciš ih jednom.
 - **Početna i Info** prikazuju samo **prvu** sliku iz svoje mape (po imenu). Za promjenu: obriši staru, ubaci novu.
   Ako mapu `slika-info` ostaviš praznu, Info stranica je samo tekst.
 - **Brisanje:** klikni na sliku → `…` gore desno → **Delete file**.
-- **Redoslijed u galeriji:** abecedno po imenu datoteke — imenuj ih `01-...jpg`, `02-...jpg`…
-  U `crno-bijelo.md` / `boja.md` možeš staviti `redoslijed: obrnuto`.
+- **Imena slika:** samo broj — `01.jpg`, `02.jpg` … `20.jpg` (redoslijed ide po broju; prvih 10 se prvo vidi).
+  U `black-and-white.md` / `colour.md` i `hr/crno-bijelo.md` / `hr/boja.md` možeš staviti `redoslijed: obrnuto`.
 - **Veličina:** JPG, duža stranica ~2000 px, kvaliteta ~82 %, sRGB.
 - Testne slike (`test-…`) obriši kad ubaciš prave.
 
@@ -54,7 +60,7 @@ Postavke u `_config.yml`:
 
 ## 3. Tekstovi
 
-- **Početna, Info, Kontakt:** otvori `.md` datoteku (HR u glavnoj mapi, EN u mapi `en`) → olovka **Edit** → piši.
+- **Početna, Info, Kontakt:** otvori `.md` datoteku (EN u glavnoj mapi, HR u mapi `hr`) → olovka **Edit** → piši.
   Prazan red = novi odlomak · `**podebljano**` · `*kurziv*` · `## Podnaslov` · `- stavka popisa`.
 - **Izbornik** (nazivi stranica, HR i EN): `_data/izbornik.yml`
 - **Sitni natpisi** („fotograf“ / „photographer“, natpisi u formi, poruke): `_data/tekstovi.yml`
@@ -96,9 +102,9 @@ Kad Vedran klikne **Odgovori** na takav mail, odgovor ide osobi koja je poslala 
 ## 7. SEO (Google) — sve je već ugrađeno
 
 - **Naslov i opis** svake stranice na oba jezika → opis se mijenja u retku `opis:` na vrhu svake `.md` datoteke (do ~160 znakova).
-- **Jezične verzije** (hreflang) — Google zna da su `/boja/` i `/en/colour/` ista stranica na dva jezika.
+- **Jezične verzije** (hreflang) — Google zna da su `/colour/` i `/hr/boja/` ista stranica na dva jezika.
 - **Sitemap** sa svim stranicama i svim fotografijama: `https://vedransminderovac.com/sitemap.xml` (sam se osvježava).
-- **robots.txt**, **favicon** (crno V), **stranica 404**.
+- **robots.txt**, **favicon** (logo VS), **stranica 404**.
 - **Pregled pri dijeljenju linka** (Facebook, WhatsApp, Viber…): naslov, opis i prva fotografija te stranice.
 - **Strukturirani podaci** o Vedranu (fotograf, Zagreb, Fotoklub Zagreb, Instagram).
 - **Opis svake fotografije** radi se iz imena datoteke: `03-biciklist-u-dezju.jpg` → „biciklist u dezju — Vedran Sminderovac“.
