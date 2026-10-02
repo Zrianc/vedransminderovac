@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="{{ site.font_link }}">
   {%- endif %}
-  <link rel="stylesheet" href="{{ '/assets/stil.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/stil.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <style>:root { --font-naslovi: "{{ site.font_naslovi }}", var(--font); }</style>
 </head>
 <body class="{% if site.crno_bijele_slike %}cb{% endif %}"{% if site.vodeni_zig != "" %} data-zig="{{ site.vodeni_zig | escape }}"{% endif %}>
@@ -75,6 +75,6 @@
     </div>
   </footer>
 
-  <script src="{{ '/assets/galerija.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/galerija.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 </body>
 </html>

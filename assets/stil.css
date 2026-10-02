@@ -478,7 +478,6 @@ body.cb .zasticeno img { filter: grayscale(1); }
 }
 .mz-plocica {
   position: absolute;
-  transition: left .8s ease, top .8s ease, width .8s ease, height .8s ease;
   padding: 0;
   border: 0;
   background: none;
@@ -499,6 +498,7 @@ body.cb .zasticeno img { filter: grayscale(1); }
   pointer-events: none;
   -webkit-user-drag: none;
 }
+.mz-spreman .mz-plocica { transition: left .8s ease, top .8s ease, width .8s ease, height .8s ease; }
 .mz-plocica img.vidljiva {
   opacity: 1;
   /* pojavljivanje: sporo i mekano, sporije od nestajanja */

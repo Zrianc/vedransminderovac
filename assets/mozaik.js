@@ -130,6 +130,7 @@
     });
   }
   raspored();
+  requestAnimationFrame(function () { mz.classList.add('mz-spreman'); });
   var cekaj; window.addEventListener('resize', function () { clearTimeout(cekaj); cekaj = setTimeout(raspored, 150); });
 
   function zamijeni() {

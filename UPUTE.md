@@ -41,7 +41,8 @@ Obje jezične verzije koriste **iste slike** — ubaciš ih jednom.
 
 ## Galerije: mozaik
 
-Na stranicama **Crno-bijelo** i **Boja** na ekranu je odjednom 10 slika (bez scrollanja),
+Na stranicama **Crno-bijelo** i **Boja** na ekranu je odjednom 10 slika (bez scrollanja), **razbacanih nasumično i različitih veličina**
+(svaki put kad se stranica otvori raspored je drugačiji, fotke se nikad ne preklapaju),
 a svakih 5 sekundi jedna se polako pretopi (fade) u drugu iz mape — tako se izmijene sve slike.
 Klik na sliku otvara je cijelu, preko cijelog ekrana (strelice / povlačenje prstom za ostale).
 Kad je miš na slici, ta se slika ne mijenja.
