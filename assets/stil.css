@@ -473,18 +473,12 @@ body.cb .zasticeno img { filter: grayscale(1); }
 .stranica-crno-bijelo, .stranica-boja { padding-bottom: 28px; }
 .mozaik { position: relative; }
 .mz-mreza {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
-  gap: var(--gap, 28px);
+  position: relative;
   height: 100%;
 }
 .mz-plocica {
-  position: relative;
-  flex: none;
-  width: var(--sirina-p, 240px);
-  height: var(--visina-p, 240px);
+  position: absolute;
+  transition: left .8s ease, top .8s ease, width .8s ease, height .8s ease;
   padding: 0;
   border: 0;
   background: none;
@@ -499,7 +493,6 @@ body.cb .zasticeno img { filter: grayscale(1); }
   width: 100%;
   height: 100%;
   object-fit: contain;          /* cijela slika, bez rezanja — svaka u svom formatu */
-  object-position: var(--poz, center);
   opacity: 0;
   /* nestajanje (kad se makne klasa .vidljiva) */
   transition: opacity var(--fade, 2.5s) cubic-bezier(.45, 0, .55, 1), transform .6s ease;

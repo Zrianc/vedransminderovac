@@ -30,7 +30,6 @@
   prikazano.forEach(function (idx, t) {
     var p = document.createElement('button');
     p.className = 'mz-plocica';
-    p.style.setProperty('--poz', ['center bottom', 'center center', 'center top', 'center 70%', 'center 35%'][t % 5]);
     p.setAttribute('aria-label', popis[idx].alt);
     p.appendChild(slika(idx, true));
     p.addEventListener('click', function () { window.Lightbox && window.Lightbox.otvori(popis, prikazano[t]); });
@@ -50,30 +49,88 @@
     return im;
   }
 
-  // Raspored: izračunaj broj stupaca tako da (većinom položene) fotke budu što veće
-  var omjer = 1.5;                      // tipičan omjer fotke (širina / visina)
+  // Raspored: fotke "razbacane" po ekranu, nasumičnih veličina, bez preklapanja i bez velikih rupa.
+  // Svaki put kad se stranica otvori raspored je drugačiji.
+  var omjer = 1.5;                                   // okvir fotke (širina / visina) — većina fotki je položena
+  var faktori = plocice.map(function () { return 0.75 + Math.random() * 0.55; });   // veličine 75 %–130 %
+
+  function sudara(o, ostali, gap) {
+    return ostali.some(function (b) {
+      return b !== o && o.x < b.x + b.w + gap && o.x + o.w + gap > b.x && o.y < b.y + b.h + gap && o.y + o.h + gap > b.y;
+    });
+  }
+
+  function jedanRaspored(W, H, gap, popuna) {
+    var baza = Math.sqrt(W * H * popuna / k * omjer);
+    var redoslijed = faktori.map(function (f, i) { return i; }).sort(function (a, b) { return faktori[b] - faktori[a]; });
+    for (var mjera = 1; mjera > 0.3; mjera *= 0.94) {
+      var post = [], ok = true;
+      for (var n = 0; n < redoslijed.length && ok; n++) {
+        var t = redoslijed[n];
+        var w = Math.min(W, baza * faktori[t] * mjera), h = w / omjer;
+        if (h > H) { h = H; w = h * omjer; }
+        var naj = null;
+        for (var p = 0; p < 300; p++) {
+          var o = { t: t, x: Math.random() * (W - w), y: Math.random() * (H - h), w: w, h: h };
+          if (sudara(o, post, gap)) continue;
+          var d = post.reduce(function (m, b) {
+            var dx = (o.x + o.w / 2) - (b.x + b.w / 2), dy = (o.y + o.h / 2) - (b.y + b.h / 2);
+            return Math.min(m, dx * dx + dy * dy);
+          }, Infinity);
+          if (!naj || d > naj.d) { naj = o; naj.d = d; }
+        }
+        if (!naj) ok = false; else post.push(naj);
+      }
+      if (ok) break;
+    }
+    // "rast": svaka fotka se malo po malo širi u prazan prostor oko sebe
+    for (var krug = 0; krug < 120; krug++) {
+      var naraslo = false;
+      post.forEach(function (o) {
+        // prvo se pokušaj malo pomaknuti prema najbližem praznom prostoru
+        var korak = Math.max(4, o.w * 0.04);
+        [[korak, 0], [-korak, 0], [0, korak], [0, -korak]].forEach(function (d) {
+          var c = { x: Math.max(0, Math.min(W - o.w, o.x + d[0])), y: Math.max(0, Math.min(H - o.h, o.y + d[1])), w: o.w * 1.02, h: o.w * 1.02 / omjer };
+          if (c.x + c.w <= W && c.y + c.h <= H && !sudara(c, post.filter(function (b) { return b !== o; }), gap)) {
+            o.x = c.x; o.y = c.y; o.w = c.w; o.h = c.h; naraslo = true;
+          }
+        });
+        var nw = o.w * 1.02, nh = nw / omjer;
+        var pomaci = [[0.5, 0.5], [0, 0], [1, 0], [0, 1], [1, 1], [0.5, 0], [0.5, 1], [0, 0.5], [1, 0.5]];
+        for (var q = 0; q < pomaci.length; q++) {
+          var c = { x: o.x - (nw - o.w) * pomaci[q][0], y: o.y - (nh - o.h) * pomaci[q][1], w: nw, h: nh };
+          c.x = Math.max(0, Math.min(W - nw, c.x)); c.y = Math.max(0, Math.min(H - nh, c.y));
+          if (nw <= W && nh <= H && !sudara(c, post.filter(function (b) { return b !== o; }), gap)) {
+            o.x = c.x; o.y = c.y; o.w = nw; o.h = nh; naraslo = true; break;
+          }
+        }
+      });
+      if (!naraslo) break;
+    }
+    post.povrsina = post.reduce(function (s, o) { return s + o.w * o.h; }, 0);
+    return post;
+  }
+
   function raspored() {
     var vrh = mz.getBoundingClientRect().top + window.scrollY;
-    var H = Math.max(320, window.innerHeight - vrh - 28);
+    var H = Math.max(360, window.innerHeight - vrh - 28);
     var W = mz.clientWidth;
-    var gap = window.innerWidth < 700 ? 12 : 28;
-    var najbolje = null;
-    for (var c = 1; c <= k; c++) {
-      var r = Math.ceil(k / c);
-      var w = (W - gap * (c - 1)) / c, h = (H - gap * (r - 1)) / r;
-      if (w <= 0 || h <= 0) continue;
-      var fw = Math.min(w, h * omjer), fh = fw / omjer;      // položena fotka u ćeliji
-      var vw = Math.min(h / omjer, w), vh = vw * omjer;      // uspravna fotka u ćeliji
-      var ocjena = fw * fh * 0.8 + vw * vh * 0.2;
-      if (!najbolje || ocjena > najbolje.ocjena) najbolje = { c: c, r: r, w: w, h: h, ocjena: ocjena };
-    }
+    var mob = window.innerWidth < 700;
+    var gap = mob ? 10 : 18;
     mz.style.height = H + 'px';
-    mreza.style.setProperty('--gap', gap + 'px');
-    mreza.style.setProperty('--sirina-p', Math.floor(najbolje.w) + 'px');
-    mreza.style.setProperty('--visina-p', Math.floor(najbolje.h) + 'px');
+    var najbolji = null;
+    for (var pokusaj = 0; pokusaj < 12; pokusaj++) {       // od 12 rasporeda uzmi najpopunjeniji
+      var r = jedanRaspored(W, H, gap, mob ? 0.62 : 0.55);
+      if (!najbolji || r.povrsina > najbolji.povrsina) najbolji = r;
+    }
+    najbolji.forEach(function (o) {
+      var st = plocice[o.t].style;
+      st.left = Math.round(o.x) + 'px'; st.top = Math.round(o.y) + 'px';
+      st.width = Math.round(o.w) + 'px'; st.height = Math.round(o.h) + 'px';
+    });
   }
   raspored();
-  window.addEventListener('resize', raspored);
+  var cekaj; window.addEventListener('resize', function () { clearTimeout(cekaj); cekaj = setTimeout(raspored, 150); });
 
   function zamijeni() {
     if (!red.length) return;
