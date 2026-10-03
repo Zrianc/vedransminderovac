@@ -553,3 +553,18 @@ body.cb .mz-plocica img { filter: grayscale(1); }
 /* Instagram u podnožju: ikona + @ime */
 .podnozje .ig { margin-top: 0; display: inline-flex; align-items: center; gap: 8px; text-transform: none; letter-spacing: .04em; }
 .podnozje .ig svg { flex: none; }
+
+/* Kontakt: forma lijevo, fotografija desno */
+.kontakt-stranica {
+  display: grid;
+  grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+  gap: 80px;
+  align-items: start;
+}
+.kontakt-slika { position: sticky; top: 120px; }
+.kontakt-slika img { max-height: calc(100vh - 180px); object-fit: contain; object-position: left top; }
+.kontakt-stranica:not(:has(figure)) { grid-template-columns: minmax(0, 560px); }
+@media (max-width: 900px) {
+  .kontakt-stranica { grid-template-columns: 1fr; gap: 40px; }
+  .kontakt-slika { position: static; }
+}

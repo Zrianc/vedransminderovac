@@ -39,7 +39,8 @@ font_link: "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
 #   "mreza"  = sve slike jedna ispod druge (scroll)
 galerija_nacin: "mozaik"
 mozaik_broj: 10        # koliko slika je odjednom na ekranu
-mozaik_sekunde: 5      # svakih koliko sekundi se jedna slika zamijeni
+mozaik_prvi: 2         # nakon koliko sekundi se mijenja PRVA slika
+mozaik_sekunde: 4      # svakih koliko sekundi se zatim mijenja sljedeća
 mozaik_fade: 1.5       # koliko sekundi stara slika nestaje (fade out)
 mozaik_pojava: 2.5     # koliko sekundi se nova slika pojavljuje (fade in)
 

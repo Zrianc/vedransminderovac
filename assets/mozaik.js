@@ -8,7 +8,10 @@
   });
   if (!popis.length) return;
 
-  var sekunde = parseFloat(mz.dataset.sekunde) || 5;
+  var sekunde = parseFloat(mz.dataset.sekunde) || 4;
+  var prvi = parseFloat(mz.dataset.prvi);            // prva izmjena dolazi ranije
+  if (isNaN(prvi)) prvi = 2;
+  var zapoceto = false;
   var fade = parseFloat(mz.dataset.fade) || 2.5;      // nestajanje stare
   var pojava = parseFloat(mz.dataset.pojava) || 4;    // pojavljivanje nove
   mz.style.setProperty('--fade', fade + 's');
@@ -162,9 +165,20 @@
     if (im.complete) pokazi(); else { im.onload = pokazi; im.onerror = function () { red.push(nova); }; }
   }
 
+  var prviTajmer = null;
   function kreni() {
-    clearInterval(tajmer);
-    if (!stoji && red.length) tajmer = setInterval(zamijeni, sekunde * 1000);
+    clearInterval(tajmer); clearTimeout(prviTajmer);
+    if (stoji || !red.length) return;
+    if (!zapoceto) {
+      // prva slika se mijenja nakon "prvi" sekundi, ostale svakih "sekunde"
+      prviTajmer = setTimeout(function () {
+        zapoceto = true;
+        zamijeni();
+        tajmer = setInterval(zamijeni, sekunde * 1000);
+      }, prvi * 1000);
+    } else {
+      tajmer = setInterval(zamijeni, sekunde * 1000);
+    }
   }
 
   // Pauza dok je otvorena velika slika ili je kartica skrivena

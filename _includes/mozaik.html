@@ -10,7 +10,7 @@
 {%- assign na_ekranu = site.mozaik_broj | default: 10 -%}
 {%- assign broj = 0 -%}
 
-<div class="mozaik" data-sekunde="{{ site.mozaik_sekunde | default: 5 }}" data-fade="{{ site.mozaik_fade | default: 2.5 }}" data-pojava="{{ site.mozaik_pojava | default: 4 }}" data-na-ekranu="{{ na_ekranu }}">
+<div class="mozaik" data-prvi="{{ site.mozaik_prvi | default: 2 }}" data-sekunde="{{ site.mozaik_sekunde | default: 4 }}" data-fade="{{ site.mozaik_fade | default: 2.5 }}" data-pojava="{{ site.mozaik_pojava | default: 4 }}" data-na-ekranu="{{ na_ekranu }}">
   <ul class="mozaik-popis" hidden>
     {%- for f in sve -%}
       {%- assign pocetak = f.path | slice: 0, duljina -%}

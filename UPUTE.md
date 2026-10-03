@@ -8,7 +8,7 @@
 | Black & White / Crno-bijelo | `/black-and-white/` | `/hr/crno-bijelo/` | — | `slike-crno-bijelo` |
 | Colour / Boja | `/colour/` | `/hr/boja/` | — | `slike-boja` |
 | Info | `/info/` | `/hr/info/` | `info.md` · `hr/info.md` | `slika-info` (1 slika, nije obavezna) |
-| Contact / Kontakt | `/contact/` | `/hr/kontakt/` | `contact.md` · `hr/kontakt.md` | — |
+| Contact / Kontakt | `/contact/` | `/hr/kontakt/` | `contact.md` · `hr/kontakt.md` | `slika-kontakt` (1 slika, nije obavezna) |
 
 Stranica se **uvijek prvo otvara na engleskom**; zastavicom se prebacuje na hrvatski.
 Mapa `stare-adrese` samo preusmjerava stare linkove (`/en/...`, `/boja/`…) na nove — ne treba je dirati.
@@ -43,7 +43,7 @@ Obje jezične verzije koriste **iste slike** — ubaciš ih jednom.
 
 Na stranicama **Crno-bijelo** i **Boja** na ekranu je odjednom 10 slika (bez scrollanja), **razbacanih nasumično i različitih veličina**
 (svaki put kad se stranica otvori raspored je drugačiji, fotke se nikad ne preklapaju),
-a svakih 5 sekundi jedna se polako pretopi (fade) u drugu iz mape — tako se izmijene sve slike.
+prva se zamijeni nakon 2 sekunde, a zatim svake 4 sekunde jedna se polako pretopi (fade) u drugu iz mape — tako se izmijene sve slike.
 Klik na sliku otvara je cijelu, preko cijelog ekrana (strelice / povlačenje prstom za ostale).
 Kad je miš na slici, ta se slika ne mijenja.
 
@@ -54,7 +54,8 @@ a slika koja izađe ide na kraj reda. Zato je dobro da u mapi bude više slika n
 
 Postavke u `_config.yml`:
 - `mozaik_broj: 10` — koliko slika je odjednom na ekranu
-- `mozaik_sekunde: 5` — svakih koliko sekundi se jedna slika zamijeni (veće = sporije)
+- `mozaik_prvi: 2` — nakon koliko sekundi se mijenja prva slika
+- `mozaik_sekunde: 4` — svakih koliko sekundi se zatim mijenja sljedeća (veće = sporije)
 - `mozaik_fade: 1.5` — koliko sekundi stara slika nestaje
 - `mozaik_pojava: 2.5` — koliko sekundi se nova slika pojavljuje
 - `galerija_nacin: "mreza"` — vraća klasičnu galeriju (sve slike, scroll)

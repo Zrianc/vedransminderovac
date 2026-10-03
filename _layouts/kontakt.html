@@ -3,7 +3,8 @@ layout: default
 ---
 {%- assign jezik = page.jezik | default: "hr" -%}
 {%- assign t = site.data.tekstovi[jezik] -%}
-<section class="kontakt">
+<section class="kontakt-stranica">
+<div class="kontakt">
   <h1 class="naslov-stranice">{{ page.naslov }}</h1>
   <div class="kontakt-uvod">{{ content }}</div>
 
@@ -48,6 +49,8 @@ layout: default
     <button type="submit">{{ t.forma_gumb }}</button>
     <p class="forma-status" role="status" aria-live="polite"></p>
   </form>
+</div>
+{% include prva-slika.html mapa="slika-kontakt" klasa="kontakt-slika" %}
 
 </section>
 <script src="{{ '/assets/kontakt.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
